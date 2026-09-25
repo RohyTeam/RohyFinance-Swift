@@ -54,6 +54,26 @@
         }
       }
     },
+    "Add Budget": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "添加预算"
+          }
+        }
+      }
+    },
+    "Add Savings Goal": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "添加攒钱"
+          }
+        }
+      }
+    },
     "Add Subcategory": {
       "localizations": {
         "zh-Hans": {
@@ -200,6 +220,26 @@
           "stringUnit": {
             "state": "translated",
             "value": "英镑"
+          }
+        }
+      }
+    },
+    "Budget": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "预算"
+          }
+        }
+      }
+    },
+    "Budgets": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "预算"
           }
         }
       }
@@ -401,6 +441,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "编辑"
+          }
+        }
+      }
+    },
+    "Edit Budget": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "编辑预算"
           }
         }
       }
@@ -827,6 +877,56 @@
         }
       }
     },
+    "Per Month": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "每月"
+          }
+        }
+      }
+    },
+    "Per Quarter": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "每季"
+          }
+        }
+      }
+    },
+    "Per Week": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "每周"
+          }
+        }
+      }
+    },
+    "Per Year": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "每年"
+          }
+        }
+      }
+    },
+    "Period": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "周期"
+          }
+        }
+      }
+    },
     "Please enter a name": {
       "localizations": {
         "zh-Hans": {
@@ -943,6 +1043,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "请选择钱包"
+          }
+        }
+      }
+    },
+    "Please select an icon": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "请选择图标"
           }
         }
       }
@@ -1258,12 +1368,52 @@
         }
       }
     },
+    "This month": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "本月"
+          }
+        }
+      }
+    },
+    "This quarter": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "本季"
+          }
+        }
+      }
+    },
     "This wallet has records and cannot be deleted": {
       "localizations": {
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
             "value": "该钱包存在账单记录，无法删除"
+          }
+        }
+      }
+    },
+    "This week": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "本周"
+          }
+        }
+      }
+    },
+    "This year": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "本年"
           }
         }
       }

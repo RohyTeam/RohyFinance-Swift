@@ -14,6 +14,7 @@ struct RecordEntryView: View {
     @Environment(\.dismiss) private var dismiss
     @Query private var wallets: [Wallet]
     @Query private var subcategories: [Subcategory]
+    @Query private var budgets: [Budget]
     @AppStorage("defaultCurrency") private var defaultCurrencyRaw = Currency.defaultForLocale().rawValue
 
     @State private var kind: RecordKind = .expense
@@ -21,6 +22,7 @@ struct RecordEntryView: View {
     @State private var subcategory: Subcategory?
     @State private var note = ""
     @State private var currency: Currency?
+    @State private var budget: Budget?
     @State private var intPart = ""
     @State private var fracPart = ""
     @State private var wallet: Wallet?
@@ -70,6 +72,7 @@ struct RecordEntryView: View {
         _category = State(initialValue: CategoryStore.find(record.categoryKey))
         _note = State(initialValue: record.note)
         _currency = State(initialValue: record.currency)
+        _budget = State(initialValue: record.budget)
         (_intPart, _fracPart) = Self.amountStates(record.amount)
         _wallet = State(initialValue: record.wallet)
         _targetWallet = State(initialValue: record.targetWallet)
@@ -218,6 +221,8 @@ struct RecordEntryView: View {
                         holdingCurrencyPicker(currencies: wallet?.holdings.map(\.currency) ?? [], selection: $currency)
                             .disabled(wallet == nil || (wallet?.holdings.count ?? 0) <= 1)
 
+                        budgetPicker
+
                         amountRow(Text("Amount"), intPart: $intPart, fracPart: $fracPart)
 
                         if needsConversion {
@@ -321,6 +326,10 @@ struct RecordEntryView: View {
                 } else {
                     currency = newValue?.holdings.count == 1 ? newValue?.holdings.first?.currency : nil
                 }
+                budget = nil
+            }
+            .onChange(of: currency) { _, _ in
+                budget = nil
             }
             .onChange(of: targetWallet) { _, newValue in
                 targetCurrency = newValue?.holdings.count == 1 ? newValue?.holdings.first?.currency : nil
@@ -359,6 +368,31 @@ struct RecordEntryView: View {
         }
         .pickerStyle(.menu)
         .disabled(category == nil)
+    }
+
+    /// Budgets matching the selected wallet and currency.
+    private var availableBudgets: [Budget] {
+        guard let wallet, let currency else { return [] }
+        return budgets.filter { $0.wallet === wallet && $0.currencyRaw == currency.rawValue }
+    }
+
+    /// Optional budget picker: budgets of the selected wallet + currency.
+    private var budgetPicker: some View {
+        Picker(selection: $budget) {
+            Text("None").tag(Budget?.none)
+            ForEach(availableBudgets) { budget in
+                Label {
+                    Text(budget.name)
+                } icon: {
+                    Image(systemName: budget.icon)
+                }
+                .tag(Budget?.some(budget))
+            }
+        } label: {
+            Text("Budget")
+        }
+        .pickerStyle(.menu)
+        .disabled(wallet == nil || currency == nil)
     }
 
     /// Segmented "汇率 / 值" picker for the conversion method.
@@ -556,6 +590,7 @@ struct RecordEntryView: View {
                 note: trimmedNote,
                 date: date,
                 wallet: wallet,
+                budget: budget,
                 taxAmount: tax,
                 discountAmount: discount,
                 consumptionTaxAmount: consumptionTax,
@@ -650,5 +685,5 @@ struct RecordEntryView: View {
 
 #Preview {
     RecordEntryView()
-        .modelContainer(for: [Wallet.self, BillRecord.self, Subcategory.self], inMemory: true)
+        .modelContainer(for: [Wallet.self, BillRecord.self, Subcategory.self, Subscription.self, Budget.self], inMemory: true)
 }

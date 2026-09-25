@@ -12,8 +12,12 @@ struct WalletsView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var wallets: [Wallet]
     @Query private var records: [BillRecord]
+    @Query private var budgets: [Budget]
     @State private var showAddWallet = false
+    @State private var showAddBudget = false
+    @State private var showSavingsComingSoon = false
     @State private var editingWallet: Wallet?
+    @State private var editingBudget: Budget?
     @State private var errorMessage: String?
 
     private var sortedWallets: [Wallet] {
@@ -51,6 +55,42 @@ struct WalletsView: View {
                         }
                     }
                 }
+
+                if !budgets.isEmpty {
+                    Section("Budgets") {
+                        ForEach(budgets) { budget in
+                            HStack(spacing: 12) {
+                                Image(systemName: budget.icon)
+                                    .frame(width: 32, height: 32)
+                                Text(budget.name)
+                                Spacer()
+                                VStack(alignment: .trailing, spacing: 2) {
+                                    Text(moneyText(budget.amount, currency: budget.currency))
+                                        .foregroundStyle(.secondary)
+                                    HStack(spacing: 4) {
+                                        WalletIconView(wallet: budget.wallet, size: 12)
+                                        Text("\(budget.wallet?.displayName ?? "-") · \(budget.period.localizedName)")
+                                    }
+                                    .font(.caption)
+                                    .foregroundStyle(.secondary)
+                                }
+                            }
+                            .swipeActions {
+                                Button(role: .destructive) {
+                                    modelContext.delete(budget)
+                                } label: {
+                                    Label("Delete", systemImage: "trash")
+                                }
+                                Button {
+                                    editingBudget = budget
+                                } label: {
+                                    Label("Edit", systemImage: "pencil")
+                                }
+                                .tint(.orange)
+                            }
+                        }
+                    }
+                }
             }
             .navigationTitle("Assets")
             .overlay {
@@ -61,8 +101,22 @@ struct WalletsView: View {
             }
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button {
-                        showAddWallet = true
+                    Menu {
+                        Button {
+                            showAddWallet = true
+                        } label: {
+                            Label("Add Wallet", systemImage: "wallet.pass")
+                        }
+                        Button {
+                            showAddBudget = true
+                        } label: {
+                            Label("Add Budget", systemImage: "chart.pie")
+                        }
+                        Button {
+                            showSavingsComingSoon = true
+                        } label: {
+                            Label("Add Savings Goal", systemImage: "chart.line.uptrend.xyaxis")
+                        }
                     } label: {
                         Image(systemName: "plus")
                     }
@@ -71,6 +125,19 @@ struct WalletsView: View {
             .sheet(isPresented: $showAddWallet) {
                 WalletFormView()
                     .presentationDetents([.large])
+            }
+            .sheet(isPresented: $showAddBudget) {
+                BudgetFormView()
+                    .presentationDetents([.large])
+            }
+            .sheet(item: $editingBudget) { budget in
+                BudgetFormView(budget: budget)
+                    .presentationDetents([.large])
+            }
+            .alert("Notice", isPresented: $showSavingsComingSoon) {
+                Button("OK") {}
+            } message: {
+                Text("Coming Soon")
             }
             .sheet(item: $editingWallet) { wallet in
                 WalletFormView(wallet: wallet)
@@ -362,5 +429,5 @@ struct WalletFormView: View {
 
 #Preview {
     WalletsView()
-        .modelContainer(for: [Wallet.self, BillRecord.self, Subcategory.self], inMemory: true)
+        .modelContainer(for: [Wallet.self, BillRecord.self, Subcategory.self, Subscription.self, Budget.self], inMemory: true)
 }

@@ -16,6 +16,7 @@ struct RohyFinanceApp: App {
             BillRecord.self,
             Subcategory.self,
             Subscription.self,
+            Budget.self,
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 

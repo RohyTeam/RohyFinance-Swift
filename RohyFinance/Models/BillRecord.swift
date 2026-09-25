@@ -39,6 +39,8 @@ final class BillRecord {
     var targetCurrencyRaw: String?
     /// Set when the record was auto-created by a subscription renewal.
     var subscription: Subscription?
+    /// The budget this record counts towards (optional).
+    var budget: Budget?
     /// Income: tax deducted from the pre-tax amount.
     var taxAmount: Double?
     /// Expense: discount deducted from the original price.
@@ -53,7 +55,7 @@ final class BillRecord {
     var convertedDiscountAmount: Double?
     var convertedConsumptionTaxAmount: Double?
 
-    init(kind: RecordKind, amount: Double, currency: Currency, categoryKey: String, subcategory: String?, note: String, date: Date, wallet: Wallet?, targetWallet: Wallet? = nil, targetCurrencyRaw: String? = nil, taxAmount: Double? = nil, discountAmount: Double? = nil, consumptionTaxAmount: Double? = nil, feeAmount: Double? = nil, convertedAmount: Double? = nil, convertedTaxAmount: Double? = nil, convertedDiscountAmount: Double? = nil, convertedConsumptionTaxAmount: Double? = nil) {
+    init(kind: RecordKind, amount: Double, currency: Currency, categoryKey: String, subcategory: String?, note: String, date: Date, wallet: Wallet?, targetWallet: Wallet? = nil, targetCurrencyRaw: String? = nil, budget: Budget? = nil, taxAmount: Double? = nil, discountAmount: Double? = nil, consumptionTaxAmount: Double? = nil, feeAmount: Double? = nil, convertedAmount: Double? = nil, convertedTaxAmount: Double? = nil, convertedDiscountAmount: Double? = nil, convertedConsumptionTaxAmount: Double? = nil) {
         self.kindRaw = kind.rawValue
         self.amount = amount
         self.currencyRaw = currency.rawValue
@@ -64,6 +66,7 @@ final class BillRecord {
         self.wallet = wallet
         self.targetWallet = targetWallet
         self.targetCurrencyRaw = targetCurrencyRaw
+        self.budget = budget
         self.taxAmount = taxAmount
         self.discountAmount = discountAmount
         self.consumptionTaxAmount = consumptionTaxAmount
@@ -150,6 +153,7 @@ final class BillRecord {
         wallet = draft.wallet
         targetWallet = draft.targetWallet
         targetCurrencyRaw = draft.targetCurrencyRaw
+        budget = draft.budget
         taxAmount = draft.taxAmount
         discountAmount = draft.discountAmount
         consumptionTaxAmount = draft.consumptionTaxAmount
@@ -176,6 +180,7 @@ struct RecordDraft {
     var wallet: Wallet?
     var targetWallet: Wallet? = nil
     var targetCurrencyRaw: String? = nil
+    var budget: Budget? = nil
     var taxAmount: Double? = nil
     var discountAmount: Double? = nil
     var consumptionTaxAmount: Double? = nil
@@ -227,6 +232,7 @@ struct RecordDraft {
             wallet: wallet,
             targetWallet: targetWallet,
             targetCurrencyRaw: targetCurrencyRaw,
+            budget: budget,
             taxAmount: taxAmount,
             discountAmount: discountAmount,
             consumptionTaxAmount: consumptionTaxAmount,

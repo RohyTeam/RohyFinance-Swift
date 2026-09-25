@@ -200,5 +200,5 @@ struct RecordRow: View {
 
 #Preview {
     BillsView()
-        .modelContainer(for: [Wallet.self, BillRecord.self, Subcategory.self], inMemory: true)
+        .modelContainer(for: [Wallet.self, BillRecord.self, Subcategory.self, Subscription.self, Budget.self], inMemory: true)
 }

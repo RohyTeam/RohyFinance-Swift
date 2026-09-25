@@ -158,5 +158,5 @@ struct SubcategoryFormView: View {
     NavigationStack {
         SubcategoryManagementView()
     }
-    .modelContainer(for: [Wallet.self, BillRecord.self, Subcategory.self, Subscription.self], inMemory: true)
+    .modelContainer(for: [Wallet.self, BillRecord.self, Subcategory.self, Subscription.self, Budget.self], inMemory: true)
 }

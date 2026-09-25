@@ -11,6 +11,7 @@ import Charts
 
 struct StatisticsView: View {
     @Query private var records: [BillRecord]
+    @Query private var budgets: [Budget]
     @AppStorage("defaultCurrency") private var defaultCurrencyRaw = Currency.defaultForLocale().rawValue
     @State private var selectedMonth: Date?
     @State private var showCalendar = false
@@ -123,6 +124,7 @@ struct StatisticsView: View {
                             charts
                             comparison
                             currencyBarChart
+                            budgetSection
                         }
                         .padding()
                     }
@@ -337,9 +339,80 @@ struct StatisticsView: View {
         let good = (diff > 0) == positiveIsGood
         return good ? .green : .red
     }
+
+    /// Expense usage of a budget within its current period (in the budget's currency).
+    private func usage(for budget: Budget) -> Double {
+        guard let interval = budget.period.currentInterval() else { return 0 }
+        return records
+            .filter { $0.budget === budget && $0.kind == .expense && interval.contains($0.date) }
+            .reduce(0) { $0 + $1.effectiveAmount }
+    }
+
+    @ViewBuilder
+    private var budgetSection: some View {
+        if !budgets.isEmpty {
+            VStack(alignment: .leading, spacing: 12) {
+                Text("Budgets")
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+                LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 12) {
+                    ForEach(budgets) { budget in
+                        BudgetCard(budget: budget, used: usage(for: budget))
+                    }
+                }
+            }
+        }
+    }
+}
+
+/// A budget card showing current-period usage against its limit.
+struct BudgetCard: View {
+    let budget: Budget
+    let used: Double
+
+    private var isOverBudget: Bool {
+        used > budget.amount
+    }
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            HStack(spacing: 6) {
+                Image(systemName: budget.icon)
+                    .frame(width: 24, height: 24)
+                Text(budget.name)
+                    .font(.subheadline)
+                    .lineLimit(1)
+                Spacer()
+                Text(budget.period.currentScopeName)
+                    .font(.caption2)
+                    .foregroundStyle(.secondary)
+            }
+            HStack(spacing: 4) {
+                WalletIconView(wallet: budget.wallet, size: 14)
+                Text(budget.wallet?.displayName ?? "-")
+                Text("·")
+                Text(budget.currency.symbol)
+            }
+            .font(.caption)
+            .foregroundStyle(.secondary)
+            ProgressView(value: min(used, budget.amount), total: budget.amount)
+                .tint(isOverBudget ? .red : Color.accentColor)
+            HStack {
+                Text(moneyText(used, currency: budget.currency))
+                    .font(.caption)
+                    .foregroundStyle(isOverBudget ? .red : .secondary)
+                Spacer()
+                Text(moneyText(budget.amount, currency: budget.currency))
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+        }
+        .padding(12)
+        .background(.quaternary.opacity(0.5), in: RoundedRectangle(cornerRadius: 12, style: .continuous))
+    }
 }
 
 #Preview {
     StatisticsView()
-        .modelContainer(for: [Wallet.self, BillRecord.self, Subcategory.self], inMemory: true)
+        .modelContainer(for: [Wallet.self, BillRecord.self, Subcategory.self, Subscription.self, Budget.self], inMemory: true)
 }
