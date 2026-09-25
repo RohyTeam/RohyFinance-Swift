@@ -12,7 +12,10 @@ import SwiftData
 struct RohyFinanceApp: App {
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
-            Item.self,
+            Wallet.self,
+            BillRecord.self,
+            Subcategory.self,
+            Subscription.self,
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 

@@ -1,0 +1,22 @@
+# macOS
+.DS_Store
+
+# Xcode user data (personal settings, schemes, breakpoints)
+xcuserdata/
+*.xcuserstate
+*.xccheckout
+*.xcscmblueprint
+
+# Build products
+DerivedData/
+build/
+*.app
+*.dSYM.zip
+*.dSYM
+
+# Swift Package Manager
+.swiftpm/
+
+# Playgrounds
+timeline.xctimeline
+playground.xcworkspace
