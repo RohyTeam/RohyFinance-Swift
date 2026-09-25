@@ -559,7 +559,7 @@ struct RecordEntryView: View {
                 }
             }
 
-            let record = BillRecord(
+            let draft = RecordDraft(
                 kind: kind,
                 amount: amount,
                 currency: currency,
@@ -576,7 +576,7 @@ struct RecordEntryView: View {
                 convertedDiscountAmount: convertedDiscount,
                 convertedConsumptionTaxAmount: convertedConsumptionTax
             )
-            save(record)
+            save(draft)
         case .transfer:
             guard let wallet else {
                 return fail(String(localized: "Please select a source wallet"))
@@ -623,12 +623,11 @@ struct RecordEntryView: View {
                 fee = value > 0 ? value : nil
             }
 
-            let record = BillRecord(
+            let draft = RecordDraft(
                 kind: .transfer,
                 amount: amount,
                 currency: sourceCurrency,
                 categoryKey: "",
-                subcategory: nil,
                 note: trimmedNote,
                 date: date,
                 wallet: wallet,
@@ -637,19 +636,20 @@ struct RecordEntryView: View {
                 feeAmount: fee,
                 convertedAmount: convertedAmount
             )
-            save(record)
+            save(draft)
         }
     }
 
-    /// Saves a record: reverts the old balance effect when editing,
+    /// Saves a draft: reverts the old balance effect when editing,
     /// applies the new effect, then dismisses.
-    private func save(_ newRecord: BillRecord) {
+    private func save(_ draft: RecordDraft) {
         if let editing = record {
             editing.revertBalanceEffect()
-            editing.update(from: newRecord)
-        }
-        newRecord.applyBalanceEffect()
-        if record == nil {
+            editing.update(from: draft)
+            draft.applyBalanceEffect()
+        } else {
+            let newRecord = draft.makeRecord()
+            draft.applyBalanceEffect()
             modelContext.insert(newRecord)
         }
         dismiss()

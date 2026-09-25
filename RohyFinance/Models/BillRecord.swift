@@ -138,25 +138,103 @@ final class BillRecord {
         }
     }
 
-    /// Copies all editable fields from another record (used when saving an edit).
-    func update(from other: BillRecord) {
-        kindRaw = other.kindRaw
-        amount = other.amount
-        currencyRaw = other.currencyRaw
-        categoryKey = other.categoryKey
-        subcategory = other.subcategory
-        note = other.note
-        date = other.date
-        wallet = other.wallet
-        targetWallet = other.targetWallet
-        targetCurrencyRaw = other.targetCurrencyRaw
-        taxAmount = other.taxAmount
-        discountAmount = other.discountAmount
-        consumptionTaxAmount = other.consumptionTaxAmount
-        feeAmount = other.feeAmount
-        convertedAmount = other.convertedAmount
-        convertedTaxAmount = other.convertedTaxAmount
-        convertedDiscountAmount = other.convertedDiscountAmount
-        convertedConsumptionTaxAmount = other.convertedConsumptionTaxAmount
+    /// Copies all editable fields from a draft (used when saving an edit).
+    func update(from draft: RecordDraft) {
+        kindRaw = draft.kind.rawValue
+        amount = draft.amount
+        currencyRaw = draft.currency.rawValue
+        categoryKey = draft.categoryKey
+        subcategory = draft.subcategory
+        note = draft.note
+        date = draft.date
+        wallet = draft.wallet
+        targetWallet = draft.targetWallet
+        targetCurrencyRaw = draft.targetCurrencyRaw
+        taxAmount = draft.taxAmount
+        discountAmount = draft.discountAmount
+        consumptionTaxAmount = draft.consumptionTaxAmount
+        feeAmount = draft.feeAmount
+        convertedAmount = draft.convertedAmount
+        convertedTaxAmount = draft.convertedTaxAmount
+        convertedDiscountAmount = draft.convertedDiscountAmount
+        convertedConsumptionTaxAmount = draft.convertedConsumptionTaxAmount
+    }
+}
+
+/// Value-type snapshot of a record's editable fields.
+/// Used instead of instantiating BillRecord directly when editing: assigning a
+/// managed wallet to a new @Model's relationship implicitly inserts it into the
+/// context, which would duplicate the record being edited.
+struct RecordDraft {
+    var kind: RecordKind
+    var amount: Double
+    var currency: Currency
+    var categoryKey: String
+    var subcategory: String? = nil
+    var note: String
+    var date: Date
+    var wallet: Wallet?
+    var targetWallet: Wallet? = nil
+    var targetCurrencyRaw: String? = nil
+    var taxAmount: Double? = nil
+    var discountAmount: Double? = nil
+    var consumptionTaxAmount: Double? = nil
+    var feeAmount: Double? = nil
+    var convertedAmount: Double? = nil
+    var convertedTaxAmount: Double? = nil
+    var convertedDiscountAmount: Double? = nil
+    var convertedConsumptionTaxAmount: Double? = nil
+
+    /// Effective value in the original currency.
+    var effectiveAmount: Double {
+        switch kind {
+        case .income:
+            return amount - (taxAmount ?? 0)
+        case .expense:
+            return amount - (discountAmount ?? 0) + (consumptionTaxAmount ?? 0)
+        case .transfer:
+            return amount
+        }
+    }
+
+    var targetCurrency: Currency {
+        targetCurrencyRaw.flatMap(Currency.init(rawValue:)) ?? currency
+    }
+
+    /// Applies the draft's effect on wallet balances.
+    func applyBalanceEffect() {
+        switch kind {
+        case .expense:
+            wallet?.adjust(currency, by: -effectiveAmount)
+        case .income:
+            wallet?.adjust(currency, by: effectiveAmount)
+        case .transfer:
+            wallet?.adjust(currency, by: -(amount + (feeAmount ?? 0)))
+            targetWallet?.adjust(targetCurrency, by: convertedAmount ?? amount)
+        }
+    }
+
+    /// Creates a new record from the draft.
+    func makeRecord() -> BillRecord {
+        BillRecord(
+            kind: kind,
+            amount: amount,
+            currency: currency,
+            categoryKey: categoryKey,
+            subcategory: subcategory,
+            note: note,
+            date: date,
+            wallet: wallet,
+            targetWallet: targetWallet,
+            targetCurrencyRaw: targetCurrencyRaw,
+            taxAmount: taxAmount,
+            discountAmount: discountAmount,
+            consumptionTaxAmount: consumptionTaxAmount,
+            feeAmount: feeAmount,
+            convertedAmount: convertedAmount,
+            convertedTaxAmount: convertedTaxAmount,
+            convertedDiscountAmount: convertedDiscountAmount,
+            convertedConsumptionTaxAmount: convertedConsumptionTaxAmount
+        )
     }
 }
