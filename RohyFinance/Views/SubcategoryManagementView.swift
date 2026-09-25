@@ -95,7 +95,10 @@ struct SubcategoryFormView: View {
                 }
 
                 Section {
-                    TextField("Name", text: $name)
+                    HStack {
+                        Text("Name")
+                        TextField("Enter name", text: $name)
+                    }
                 }
             }
             .navigationTitle(subcategory == nil ? "Add Subcategory" : "Edit Subcategory")

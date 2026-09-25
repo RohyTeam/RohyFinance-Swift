@@ -455,6 +455,16 @@
         }
       }
     },
+    "Enter name": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "请输入名称"
+          }
+        }
+      }
+    },
     "Excludes consumption tax": {
       "localizations": {
         "zh-Hans": {
@@ -1335,16 +1345,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "钱包"
-          }
-        }
-      }
-    },
-    "Wallet Name": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "钱包名"
           }
         }
       }

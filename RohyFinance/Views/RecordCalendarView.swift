@@ -136,16 +136,6 @@ struct RecordCalendarView: View {
                         dayCell(item)
                     }
                 }
-                .gesture(
-                    DragGesture(minimumDistance: 20)
-                        .onEnded { value in
-                            if value.translation.width <= -50 {
-                                shiftMonth(1)
-                            } else if value.translation.width >= 50 {
-                                shiftMonth(-1)
-                            }
-                        }
-                )
 
                 Spacer()
             }

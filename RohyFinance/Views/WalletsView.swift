@@ -195,9 +195,8 @@ struct WalletFormView: View {
                 .pickerStyle(.menu)
 
                 HStack {
-                    Text("Wallet Name")
-                    TextField("", text: $name)
-                        .multilineTextAlignment(.trailing)
+                    Text("Name")
+                    TextField("Enter name", text: $name)
                 }
 
                 HStack {

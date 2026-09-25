@@ -132,11 +132,9 @@ struct RecordEntryView: View {
         return subcategories.filter { $0.categoryKey == category.key }
     }
 
-    /// Wallets supporting the selected currency (all wallets for transfers).
+    /// All wallets can be picked; the currency choice is filtered afterwards.
     private var availableWallets: [Wallet] {
-        if kind == .transfer { return wallets }
-        guard let currency else { return [] }
-        return wallets.filter { $0.supports(currency) }
+        wallets
     }
 
     private var resolvedSourceCurrency: Currency? {
@@ -165,8 +163,12 @@ struct RecordEntryView: View {
                         HStack {
                             Text("Note")
                             TextField("Enter bill note", text: $note)
-                                .multilineTextAlignment(.trailing)
                         }
+                    }
+
+                    Section("Time") {
+                        DatePicker("Date", selection: $date, displayedComponents: .date)
+                        DatePicker("Time", selection: $date, displayedComponents: .hourAndMinute)
                     }
 
                     Section("Source") {
@@ -202,12 +204,19 @@ struct RecordEntryView: View {
                         HStack {
                             Text("Note")
                             TextField("Enter bill note", text: $note)
-                                .multilineTextAlignment(.trailing)
                         }
                     }
 
+                    Section("Time") {
+                        DatePicker("Date", selection: $date, displayedComponents: .date)
+                        DatePicker("Time", selection: $date, displayedComponents: .hourAndMinute)
+                    }
+
                     Section("Bills") {
-                        currencyPicker
+                        walletPicker("Wallet", selection: $wallet)
+
+                        holdingCurrencyPicker(currencies: wallet?.holdings.map(\.currency) ?? [], selection: $currency)
+                            .disabled(wallet == nil || (wallet?.holdings.count ?? 0) <= 1)
 
                         amountRow(Text("Amount"), intPart: $intPart, fracPart: $fracPart)
 
@@ -220,14 +229,7 @@ struct RecordEntryView: View {
                                 amountRow(convertedTitle(defaultCurrency.symbol, String(localized: "Amount")), intPart: $convAmountInt, fracPart: $convAmountFrac)
                             }
                         }
-
-                        walletPicker("Wallet", selection: $wallet)
                     }
-                }
-
-                Section("Time") {
-                    DatePicker("Date", selection: $date, displayedComponents: .date)
-                    DatePicker("Time", selection: $date, displayedComponents: .hourAndMinute)
                 }
 
                 switch kind {
@@ -310,15 +312,14 @@ struct RecordEntryView: View {
                 sourceCurrency = nil
                 targetCurrency = nil
             }
-            .onChange(of: currency) { _, _ in
-                wallet = nil
-            }
             .onChange(of: category) { _, _ in
                 subcategory = nil
             }
             .onChange(of: wallet) { _, newValue in
                 if kind == .transfer {
                     sourceCurrency = newValue?.holdings.count == 1 ? newValue?.holdings.first?.currency : nil
+                } else {
+                    currency = newValue?.holdings.count == 1 ? newValue?.holdings.first?.currency : nil
                 }
             }
             .onChange(of: targetWallet) { _, newValue in
@@ -360,19 +361,6 @@ struct RecordEntryView: View {
         .disabled(category == nil)
     }
 
-    private var currencyPicker: some View {
-        Picker(selection: $currency) {
-            Text("Select").tag(Currency?.none)
-            ForEach(Currency.allCases) { currency in
-                Text("\(currency.symbol) \(currency.localizedName)")
-                    .tag(Currency?.some(currency))
-            }
-        } label: {
-            Text("Currency")
-        }
-        .pickerStyle(.menu)
-    }
-
     /// Segmented "汇率 / 值" picker for the conversion method.
     private var conversionRow: some View {
         HStack {
@@ -396,6 +384,7 @@ struct RecordEntryView: View {
                 Text(fromSymbol)
                 TextField("1.00", text: .constant(""))
                     .keyboardType(.decimalPad)
+                    .multilineTextAlignment(.trailing)
                     .disabled(true)
             }
             .frame(maxWidth: .infinity)
@@ -447,7 +436,6 @@ struct RecordEntryView: View {
             Text(title)
         }
         .pickerStyle(.menu)
-        .disabled(kind != .transfer && currency == nil)
     }
 
     @ViewBuilder
@@ -476,6 +464,9 @@ struct RecordEntryView: View {
             guard let category else {
                 return fail(String(localized: "Please select a category"))
             }
+            guard let wallet else {
+                return fail(String(localized: "Please select a wallet"))
+            }
             guard let currency else {
                 return fail(String(localized: "Please select a currency"))
             }
@@ -484,9 +475,6 @@ struct RecordEntryView: View {
             }
             guard amount > 0 else {
                 return fail(String(localized: "Please enter an amount"))
-            }
-            guard let wallet else {
-                return fail(String(localized: "Please select a wallet"))
             }
 
             var tax: Double?
