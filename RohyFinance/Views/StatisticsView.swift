@@ -120,14 +120,21 @@ struct StatisticsView: View {
                     ScrollView {
                         VStack(alignment: .leading, spacing: 24) {
                             monthMenu
-                            summaryRow
-                            charts
-                            comparison
+                            statCard {
+                                VStack(spacing: 20) {
+                                    summaryRow
+                                    Divider()
+                                    charts
+                                    Divider()
+                                    comparison
+                                }
+                            }
                             currencyBarChart
                             budgetSection
                         }
                         .padding()
                     }
+                    .background(Color(.systemGroupedBackground).ignoresSafeArea())
                 }
             }
             .navigationTitle("Statistics")
@@ -149,8 +156,15 @@ struct StatisticsView: View {
         }
     }
 
-    private var monthMenu: some View {
-        Menu {
+    /// Wraps a statistics block in a section-like card matching the list cell background.
+    private func statCard<Content: View>(@ViewBuilder _ content: () -> Content) -> some View {
+        content()
+            .padding(12)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .background(Color(.secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 12, style: .continuous))
+    }
+
+    private var monthMenu: some View {        Menu {
             ForEach(availableMonths, id: \.self) { month in
                 Button {
                     selectedMonth = month
@@ -331,6 +345,8 @@ struct StatisticsView: View {
                 RecordKind.income.localizedName: Color.green,
             ])
             .frame(height: 220)
+            .padding(12)
+            .background(Color(.secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 12, style: .continuous))
         }
     }
 
@@ -408,7 +424,7 @@ struct BudgetCard: View {
             }
         }
         .padding(12)
-        .background(.quaternary.opacity(0.5), in: RoundedRectangle(cornerRadius: 12, style: .continuous))
+        .background(Color(.secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 12, style: .continuous))
     }
 }
 

@@ -53,11 +53,13 @@ final class Wallet {
     var name: String = ""
     var sourceRaw: String = WalletSource.cash.rawValue
     var holdings: [Holding] = []
+    var isDefault: Bool = false
 
-    init(name: String, source: WalletSource, holdings: [Holding]) {
+    init(name: String, source: WalletSource, holdings: [Holding], isDefault: Bool = false) {
         self.name = name
         self.sourceRaw = source.rawValue
         self.holdings = holdings
+        self.isDefault = isDefault
     }
 
     var source: WalletSource {
@@ -66,6 +68,12 @@ final class Wallet {
 
     var displayName: String {
         name
+    }
+
+    /// The wallet's default currency: the first holding's currency
+    /// (for a single-currency wallet, simply its only currency).
+    var defaultCurrency: Currency? {
+        holdings.first?.currency
     }
 
     func supports(_ currency: Currency) -> Bool {

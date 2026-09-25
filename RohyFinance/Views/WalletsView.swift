@@ -26,79 +26,14 @@ struct WalletsView: View {
 
     var body: some View {
         NavigationStack {
-            List {
-                Section("Wallets") {
-                    ForEach(sortedWallets) { wallet in
-                        HStack(spacing: 12) {
-                            WalletIconView(wallet: wallet, size: 32)
-                            Text(wallet.displayName)
-                            Spacer()
-                            VStack(alignment: .trailing, spacing: 2) {
-                                ForEach(wallet.holdings, id: \.currencyRaw) { holding in
-                                    Text(moneyText(holding.amount, currency: holding.currency))
-                                        .foregroundStyle(.secondary)
-                                }
-                            }
-                        }
-                        .swipeActions {
-                            Button(role: .destructive) {
-                                delete(wallet)
-                            } label: {
-                                Label("Delete", systemImage: "trash")
-                            }
-                            Button {
-                                editingWallet = wallet
-                            } label: {
-                                Label("Edit", systemImage: "pencil")
-                            }
-                            .tint(.orange)
-                        }
-                    }
-                }
-
-                if !budgets.isEmpty {
-                    Section("Budgets") {
-                        ForEach(budgets) { budget in
-                            HStack(spacing: 12) {
-                                Image(systemName: budget.icon)
-                                    .frame(width: 32, height: 32)
-                                Text(budget.name)
-                                Spacer()
-                                VStack(alignment: .trailing, spacing: 2) {
-                                    Text(moneyText(budget.amount, currency: budget.currency))
-                                        .foregroundStyle(.secondary)
-                                    HStack(spacing: 4) {
-                                        WalletIconView(wallet: budget.wallet, size: 12)
-                                        Text("\(budget.wallet?.displayName ?? "-") · \(budget.period.localizedName)")
-                                    }
-                                    .font(.caption)
-                                    .foregroundStyle(.secondary)
-                                }
-                            }
-                            .swipeActions {
-                                Button(role: .destructive) {
-                                    modelContext.delete(budget)
-                                } label: {
-                                    Label("Delete", systemImage: "trash")
-                                }
-                                Button {
-                                    editingBudget = budget
-                                } label: {
-                                    Label("Edit", systemImage: "pencil")
-                                }
-                                .tint(.orange)
-                            }
-                        }
-                    }
+            Group {
+                if wallets.isEmpty {
+                    ContentUnavailableView("No wallets yet", systemImage: "wallet.pass", description: Text("Add a wallet to get started"))
+                } else {
+                    walletList
                 }
             }
             .navigationTitle("Assets")
-            .overlay {
-                if wallets.isEmpty {
-                    Text("No wallets yet")
-                        .foregroundStyle(.secondary)
-                }
-            }
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Menu {
@@ -158,6 +93,81 @@ struct WalletsView: View {
         )
     }
 
+    private var walletList: some View {
+        List {
+            Section("Wallets") {
+                ForEach(sortedWallets) { wallet in
+                    HStack(spacing: 12) {
+                        WalletIconView(wallet: wallet, size: 32)
+                        if wallet.isDefault {
+                            Image(systemName: "checkmark")
+                                .font(.caption)
+                                .foregroundStyle(Color.accentColor)
+                        }
+                        Text(wallet.displayName)
+                            .foregroundStyle(wallet.isDefault ? Color.accentColor : .primary)
+                        Spacer()
+                        VStack(alignment: .trailing, spacing: 2) {
+                            ForEach(wallet.holdings, id: \.currencyRaw) { holding in
+                                Text(moneyText(holding.amount, currency: holding.currency))
+                                    .foregroundStyle(.secondary)
+                            }
+                        }
+                    }
+                    .swipeActions {
+                        Button(role: .destructive) {
+                            delete(wallet)
+                        } label: {
+                            Label("Delete", systemImage: "trash")
+                        }
+                        Button {
+                            editingWallet = wallet
+                        } label: {
+                            Label("Edit", systemImage: "pencil")
+                        }
+                        .tint(.orange)
+                    }
+                }
+            }
+
+            if !budgets.isEmpty {
+                Section("Budgets") {
+                    ForEach(budgets) { budget in
+                        HStack(spacing: 12) {
+                            Image(systemName: budget.icon)
+                                .frame(width: 32, height: 32)
+                            Text(budget.name)
+                            Spacer()
+                            VStack(alignment: .trailing, spacing: 2) {
+                                Text(moneyText(budget.amount, currency: budget.currency))
+                                    .foregroundStyle(.secondary)
+                                HStack(spacing: 4) {
+                                    WalletIconView(wallet: budget.wallet, size: 12)
+                                    Text("\(budget.wallet?.displayName ?? "-") · \(budget.period.localizedName)")
+                                }
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                            }
+                        }
+                        .swipeActions {
+                            Button(role: .destructive) {
+                                modelContext.delete(budget)
+                            } label: {
+                                Label("Delete", systemImage: "trash")
+                            }
+                            Button {
+                                editingBudget = budget
+                            } label: {
+                                Label("Edit", systemImage: "pencil")
+                            }
+                            .tint(.orange)
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     private func delete(_ wallet: Wallet) {
         let hasRecords = records.contains { $0.wallet === wallet || $0.targetWallet === wallet }
         if hasRecords {
@@ -201,6 +211,7 @@ struct WalletFormView: View {
     @State private var fracPart = ""
     // Multi-currency rows.
     @State private var rows: [HoldingRow] = [HoldingRow()]
+    @State private var isDefault = false
     @State private var errorMessage: String?
 
     private var defaultCurrency: Currency {
@@ -228,6 +239,7 @@ struct WalletFormView: View {
         if let wallet {
             _source = State(initialValue: wallet.source)
             _name = State(initialValue: wallet.name)
+            _isDefault = State(initialValue: wallet.isDefault)
             let holdings = wallet.holdings
             if holdings.count > 1 {
                 _mode = State(initialValue: .multi)
@@ -311,8 +323,15 @@ struct WalletFormView: View {
                                     Text("Currency")
                                 }
                                 .pickerStyle(.menu)
+                                .labelsHidden()
+                                .frame(maxWidth: .infinity)
+                                Rectangle()
+                                    .fill(Color(.separator))
+                                    .frame(width: 1, height: 24)
                                 AmountField(intPart: $row.intPart, fracPart: $row.fracPart)
+                                    .frame(maxWidth: .infinity)
                             }
+                            .alignmentGuide(.listRowSeparatorLeading) { _ in 0 }
                             .swipeActions {
                                 if rows.count > 1 {
                                     Button(role: .destructive) {
@@ -323,6 +342,7 @@ struct WalletFormView: View {
                                 }
                             }
                         }
+                        .onMove(perform: moveRows)
                     } header: {
                         HStack {
                             Text("Savings")
@@ -333,7 +353,13 @@ struct WalletFormView: View {
                                 Image(systemName: "plus")
                             }
                         }
+                    } footer: {
+                        Text("The first currency is the wallet's default currency")
                     }
+                }
+
+                Section {
+                    Toggle("Default Wallet", isOn: $isDefault)
                 }
             }
             .navigationTitle(wallet == nil ? "Add Wallet" : "Edit Wallet")
@@ -413,6 +439,10 @@ struct WalletFormView: View {
                 errorMessage = String(localized: "At least one currency is required")
                 return
             }
+            guard Set(valid.map(\.currencyRaw)).count == valid.count else {
+                errorMessage = String(localized: "Duplicate currencies are not allowed")
+                return
+            }
             holdings = valid
         }
 
@@ -420,10 +450,21 @@ struct WalletFormView: View {
             wallet.sourceRaw = source.rawValue
             wallet.name = trimmed
             wallet.holdings = holdings
+            wallet.isDefault = isDefault
         } else {
-            modelContext.insert(Wallet(name: trimmed, source: source, holdings: holdings))
+            modelContext.insert(Wallet(name: trimmed, source: source, holdings: holdings, isDefault: isDefault))
+        }
+        // At most one default wallet: enabling it here disables the others.
+        if isDefault {
+            for other in wallets where other !== wallet {
+                other.isDefault = false
+            }
         }
         dismiss()
+    }
+
+    private func moveRows(from source: IndexSet, to destination: Int) {
+        rows.move(fromOffsets: source, toOffset: destination)
     }
 }
 

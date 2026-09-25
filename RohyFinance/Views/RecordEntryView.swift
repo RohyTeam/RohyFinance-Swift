@@ -316,15 +316,17 @@ struct RecordEntryView: View {
                 targetWallet = nil
                 sourceCurrency = nil
                 targetCurrency = nil
+                budget = nil
+                applyDefaultWallet()
             }
             .onChange(of: category) { _, _ in
                 subcategory = nil
             }
             .onChange(of: wallet) { _, newValue in
                 if kind == .transfer {
-                    sourceCurrency = newValue?.holdings.count == 1 ? newValue?.holdings.first?.currency : nil
+                    sourceCurrency = resolveCurrency(for: newValue, current: sourceCurrency)
                 } else {
-                    currency = newValue?.holdings.count == 1 ? newValue?.holdings.first?.currency : nil
+                    currency = resolveCurrency(for: newValue, current: currency)
                 }
                 budget = nil
             }
@@ -332,7 +334,7 @@ struct RecordEntryView: View {
                 budget = nil
             }
             .onChange(of: targetWallet) { _, newValue in
-                targetCurrency = newValue?.holdings.count == 1 ? newValue?.holdings.first?.currency : nil
+                targetCurrency = resolveCurrency(for: newValue, current: targetCurrency)
             }
             .onChange(of: note) { _, value in
                 if characterCount(of: value) > 16 {
@@ -340,6 +342,7 @@ struct RecordEntryView: View {
                 }
             }
             .onAppear {
+                applyDefaultWallet()
                 if subcategory == nil, let existingSubcategory = record?.subcategory {
                     subcategory = subcategories.first {
                         $0.name == existingSubcategory && $0.categoryKey == record?.categoryKey
@@ -368,6 +371,23 @@ struct RecordEntryView: View {
         }
         .pickerStyle(.menu)
         .disabled(category == nil)
+    }
+
+    /// Preselects the default wallet (and its default currency) when creating
+    /// a new expense/income record.
+    private func applyDefaultWallet() {
+        guard record == nil, kind != .transfer, wallet == nil,
+              let defaultWallet = wallets.first(where: { $0.isDefault }) else { return }
+        wallet = defaultWallet
+        currency = defaultWallet.defaultCurrency
+    }
+
+    /// Keeps the current currency if the wallet supports it,
+    /// otherwise falls back to the wallet's default currency.
+    private func resolveCurrency(for wallet: Wallet?, current: Currency?) -> Currency? {
+        guard let wallet else { return nil }
+        if let current, wallet.supports(current) { return current }
+        return wallet.defaultCurrency
     }
 
     /// Budgets matching the selected wallet and currency.

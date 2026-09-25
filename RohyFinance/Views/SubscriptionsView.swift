@@ -211,8 +211,7 @@ struct SubscriptionFormView: View {
     }
 
     private var availableWallets: [Wallet] {
-        guard let currency else { return [] }
-        return wallets.filter { $0.supports(currency) }
+        wallets
     }
 
     var body: some View {
@@ -226,9 +225,20 @@ struct SubscriptionFormView: View {
                 }
 
                 Section("Payment") {
+                    Picker(selection: $wallet) {
+                        Text("Select").tag(Wallet?.none)
+                        ForEach(availableWallets) { wallet in
+                            walletMenuLabel(wallet)
+                                .tag(Wallet?.some(wallet))
+                        }
+                    } label: {
+                        Text("Wallet")
+                    }
+                    .pickerStyle(.menu)
+
                     Picker(selection: $currency) {
                         Text("Select").tag(Currency?.none)
-                        ForEach(Currency.allCases) { currency in
+                        ForEach(wallet?.holdings.map(\.currency) ?? []) { currency in
                             Text("\(currency.symbol) \(currency.localizedName)")
                                 .tag(Currency?.some(currency))
                         }
@@ -236,6 +246,7 @@ struct SubscriptionFormView: View {
                         Text("Currency")
                     }
                     .pickerStyle(.menu)
+                    .disabled(wallet == nil || (wallet?.holdings.count ?? 0) <= 1)
 
                     HStack {
                         Text("Amount")
@@ -254,18 +265,6 @@ struct SubscriptionFormView: View {
                             }
                         }
                     }
-
-                    Picker(selection: $wallet) {
-                        Text("Select").tag(Wallet?.none)
-                        ForEach(availableWallets) { wallet in
-                            walletMenuLabel(wallet)
-                                .tag(Wallet?.some(wallet))
-                        }
-                    } label: {
-                        Text("Wallet")
-                    }
-                    .pickerStyle(.menu)
-                    .disabled(currency == nil)
                 }
 
                 Section("Cycle") {
@@ -323,14 +322,28 @@ struct SubscriptionFormView: View {
                     name = truncatedToCharacterCount(value, limit: 10)
                 }
             }
-            .onChange(of: currency) { _, _ in
-                wallet = nil
+            .onChange(of: wallet) { _, newValue in
+                guard let newValue else {
+                    currency = nil
+                    return
+                }
+                if let currency, newValue.supports(currency) {
+                    return
+                }
+                currency = newValue.defaultCurrency
             }
             .onChange(of: pickedImage) { _, image in
                 guard let image else { return }
                 imageData = Self.squareImageData(image)
                 presetIcon = nil
                 pickedImage = nil
+            }
+            .onAppear {
+                if subscription == nil && wallet == nil,
+                   let defaultWallet = wallets.first(where: { $0.isDefault }) {
+                    wallet = defaultWallet
+                    currency = defaultWallet.defaultCurrency
+                }
             }
         }
     }
@@ -420,8 +433,10 @@ struct SubscriptionFormView: View {
                 TextField("1.00", text: .constant(""))
                     .keyboardType(.decimalPad)
                     .disabled(true)
+                    .multilineTextAlignment(.trailing)
             }
             .frame(maxWidth: .infinity)
+            Text(":")
             HStack {
                 Text(defaultCurrency.symbol)
                 TextField("0.00", text: $rateText)
@@ -461,15 +476,15 @@ struct SubscriptionFormView: View {
         guard !trimmed.isEmpty else {
             return fail(String(localized: "Please enter a name"))
         }
+        guard let wallet else {
+            return fail(String(localized: "Please select a wallet"))
+        }
         guard let currency else {
             return fail(String(localized: "Please select a currency"))
         }
         let amount = amountValue(intPart, fracPart)
         guard amount > 0 else {
             return fail(String(localized: "Please enter an amount"))
-        }
-        guard let wallet else {
-            return fail(String(localized: "Please select a wallet"))
         }
 
         var convertedAmount: Double?

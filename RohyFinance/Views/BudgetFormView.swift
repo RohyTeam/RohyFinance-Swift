@@ -100,7 +100,14 @@ struct BudgetFormView: View {
                 Text(errorMessage ?? "")
             }
             .onChange(of: wallet) { _, newValue in
-                currency = newValue?.holdings.count == 1 ? newValue?.holdings.first?.currency : nil
+                guard let newValue else {
+                    currency = nil
+                    return
+                }
+                if let currency, newValue.supports(currency) {
+                    return
+                }
+                currency = newValue.defaultCurrency
             }
         }
     }

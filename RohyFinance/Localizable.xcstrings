@@ -114,6 +114,16 @@
         }
       }
     },
+    "Add a wallet to get started": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "点击右上角添加钱包"
+          }
+        }
+      }
+    },
     "Alipay Wallet": {
       "localizations": {
         "zh-Hans": {
@@ -385,6 +395,16 @@
         }
       }
     },
+    "Default Wallet": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "默认钱包"
+          }
+        }
+      }
+    },
     "Delete": {
       "localizations": {
         "zh-Hans": {
@@ -431,6 +451,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "完成"
+          }
+        }
+      }
+    },
+    "Duplicate currencies are not allowed": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "同一个钱包中币种不能重复"
           }
         }
       }
@@ -1364,6 +1394,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "税额不能大于金额"
+          }
+        }
+      }
+    },
+    "The first currency is the wallet's default currency": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "第一位的币种为默认币种"
           }
         }
       }
