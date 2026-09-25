@@ -10,7 +10,7 @@ on:
 
 jobs:
     build-and-release:
-        runs-on: macos-latest
+        runs-on: xcode-27
         permissions:
             contents: write
 
