@@ -127,7 +127,11 @@ struct ItemFormView: View {
                     }
 
                     OptionalDateRow(title: "Retirement Date", date: $retirementDate)
-                    OptionalDateRow(title: "Warranty End", date: $warrantyEndDate)
+                    OptionalDateRow(
+                        title: "Warranty End",
+                        date: $warrantyEndDate,
+                        defaultDate: Calendar.current.date(byAdding: .year, value: 1, to: record?.date ?? purchaseDate) ?? .now
+                    )
                 }
 
                 Section("Status") {
@@ -295,6 +299,8 @@ struct ItemFormView: View {
 struct OptionalDateRow: View {
     let title: LocalizedStringKey
     @Binding var date: Date?
+    /// The date used when the user starts picking from "未选择".
+    var defaultDate: Date = .now
 
     var body: some View {
         HStack {
@@ -319,7 +325,7 @@ struct OptionalDateRow: View {
                 .buttonStyle(.plain)
             } else {
                 Button("Not selected") {
-                    date = .now
+                    date = defaultDate
                 }
                 .foregroundStyle(.secondary)
             }

@@ -8,14 +8,15 @@
 import SwiftUI
 import UIKit
 
-/// Square grid cell for an item: photo fills the cell, info overlays the bottom.
+/// Square grid cell for an item: photo fills the cell, info overlays the
+/// bottom (centered), usage status shows as a badge at the top-right.
 struct ItemCell: View {
     let item: Item
 
     var body: some View {
         ZStack(alignment: .bottom) {
             itemImage
-            VStack(alignment: .leading, spacing: 4) {
+            VStack(spacing: 4) {
                 Text(item.name)
                     .font(.subheadline)
                     .lineLimit(1)
@@ -24,22 +25,28 @@ struct ItemCell: View {
                     Text(moneyText(item.displayValue, currency: item.displayCurrency))
                         .font(.caption)
                     Spacer()
-                    Text(item.status.localizedName)
-                        .font(.caption)
-                        .foregroundStyle(item.status.color)
+                    Text("Used for \(item.daysInUse) days")
+                        .font(.caption2)
                 }
-                Text("Days in use: \(item.daysInUse)")
-                    .font(.caption2)
             }
             .foregroundStyle(.white)
             .padding(8)
-            .frame(maxWidth: .infinity, alignment: .leading)
+            .frame(maxWidth: .infinity)
             .background(
                 LinearGradient(colors: [.clear, .black.opacity(0.55)], startPoint: .top, endPoint: .bottom)
             )
         }
         .frame(maxWidth: .infinity)
         .aspectRatio(1, contentMode: .fit)
+        .overlay(alignment: .topTrailing) {
+            Text(item.status.localizedName)
+                .font(.caption2)
+                .padding(.horizontal, 8)
+                .padding(.vertical, 4)
+                .background(item.status.color, in: Capsule())
+                .foregroundStyle(.white)
+                .padding(8)
+        }
     }
 
     @ViewBuilder

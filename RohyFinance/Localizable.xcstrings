@@ -445,16 +445,6 @@
         }
       }
     },
-    "Days in use: %lld": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "已使用时间：%lld 天"
-          }
-        }
-      }
-    },
     "Default Currency": {
       "localizations": {
         "zh-Hans": {
@@ -1797,6 +1787,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "使用状态"
+          }
+        }
+      }
+    },
+    "Used for %lld days": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已使用 %lld 天"
           }
         }
       }
