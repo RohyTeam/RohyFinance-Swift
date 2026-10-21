@@ -20,6 +20,7 @@ struct RohyFinanceApp: App {
             SavingsGoal.self,
             SavingsPlan.self,
             Item.self,
+            QuickRecord.self,
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 

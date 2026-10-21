@@ -11,6 +11,7 @@ import SwiftData
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
     @State private var showRecordSheet = false
+    @State private var showQuickRecordSheet = false
 
     var body: some View {
         TabView {
@@ -31,14 +32,29 @@ struct ContentView: View {
             }
         }
         .tabViewBottomAccessory {
-            Button {
-                showRecordSheet = true
-            } label: {
-                Label("Record", systemImage: "plus")
+            HStack(spacing: 0) {
+                Button {
+                    showQuickRecordSheet = true
+                } label: {
+                    Label("Quick Record", systemImage: "bolt")
+                }
+                .frame(maxWidth: .infinity)
+                Divider()
+                    .padding(.vertical, 8)
+                Button {
+                    showRecordSheet = true
+                } label: {
+                    Label("Record", systemImage: "plus")
+                }
+                .frame(maxWidth: .infinity)
             }
         }
         .sheet(isPresented: $showRecordSheet) {
             RecordEntryView()
+                .presentationDetents([.large])
+        }
+        .sheet(isPresented: $showQuickRecordSheet) {
+            QuickRecordPickerView()
                 .presentationDetents([.large])
         }
         .task {
@@ -60,5 +76,5 @@ struct PlaceholderView: View {
 
 #Preview {
     ContentView()
-        .modelContainer(for: [Wallet.self, BillRecord.self, Subcategory.self, Subscription.self, Budget.self, SavingsGoal.self, SavingsPlan.self, Item.self], inMemory: true)
+        .modelContainer(for: [Wallet.self, BillRecord.self, Subcategory.self, Subscription.self, Budget.self, SavingsGoal.self, SavingsPlan.self, Item.self, QuickRecord.self], inMemory: true)
 }

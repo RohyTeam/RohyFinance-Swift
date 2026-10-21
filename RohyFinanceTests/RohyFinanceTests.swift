@@ -15,7 +15,7 @@ struct RohyFinanceTests {
     @MainActor
     private func makeContext() throws -> ModelContext {
         let container = try ModelContainer(
-            for: Wallet.self, BillRecord.self, Subcategory.self, Subscription.self, Budget.self, SavingsGoal.self, SavingsPlan.self, Item.self,
+            for: Wallet.self, BillRecord.self, Subcategory.self, Subscription.self, Budget.self, SavingsGoal.self, SavingsPlan.self, Item.self, QuickRecord.self,
             configurations: ModelConfiguration(isStoredInMemoryOnly: true)
         )
         return ModelContext(container)
@@ -236,5 +236,31 @@ struct RohyFinanceTests {
         let savings = try context.fetch(FetchDescriptor<BillRecord>()).filter { $0.kind == .saving }
         #expect(savings.isEmpty)
         #expect(budget.lastSavingsProcessed == nil)
+    }
+
+    /// A quick record creates a bill with the current time and applies its
+    /// balance effect in one tap.
+    @MainActor
+    @Test func quickRecordCreatesBill() throws {
+        let context = try makeContext()
+        let wallet = Wallet(name: "A", source: .alipay, holdings: [Holding(currencyRaw: "cny", amount: 100)])
+        context.insert(wallet)
+
+        let draft = RecordDraft(kind: .expense, amount: 25, currency: .cny, categoryKey: "category.dining", note: "咖啡", date: .now, wallet: wallet)
+        let template = QuickRecord(draft: draft, imageData: nil, sortOrder: 0)
+        context.insert(template)
+        try context.save()
+
+        let record = template.makeRecord(context: context)
+        try context.save()
+
+        let records = try context.fetch(FetchDescriptor<BillRecord>())
+        #expect(records.count == 1)
+        #expect(record.note == "咖啡")
+        #expect(record.amount == 25)
+        // Date is "now" at creation, not a template-stored time.
+        #expect(abs(record.date.timeIntervalSinceNow) < 60)
+        // Wallet: 100 - 25 = 75
+        #expect(wallet.holdings.first?.amount == 75)
     }
 }

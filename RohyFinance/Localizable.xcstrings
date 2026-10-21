@@ -74,6 +74,16 @@
         }
       }
     },
+    "Add Quick Record": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "添加快捷记账"
+          }
+        }
+      }
+    },
     "Add Savings Goal": {
       "localizations": {
         "zh-Hans": {
@@ -555,6 +565,16 @@
         }
       }
     },
+    "Edit Quick Record": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "编辑快捷记账"
+          }
+        }
+      }
+    },
     "Edit Record": {
       "localizations": {
         "zh-Hans": {
@@ -827,6 +847,16 @@
         }
       }
     },
+    "Manage Quick Records": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "管理快捷记账"
+          }
+        }
+      }
+    },
     "Month": {},
     "Monthly": {
       "localizations": {
@@ -914,6 +944,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "暂无物品"
+          }
+        }
+      }
+    },
+    "No Quick Records": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "暂无快捷记账"
           }
         }
       }
@@ -1276,6 +1316,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "季度"
+          }
+        }
+      }
+    },
+    "Quick Record": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "快捷记账"
           }
         }
       }

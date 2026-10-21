@@ -187,5 +187,5 @@ struct SavingsPlanFormView: View {
     NavigationStack {
         BudgetSavingsView(budget: Budget(icon: "fork.knife", name: "预算", wallet: nil, currency: .cny, amount: 100, period: .monthly))
     }
-    .modelContainer(for: [Wallet.self, BillRecord.self, Subcategory.self, Subscription.self, Budget.self, SavingsGoal.self, SavingsPlan.self, Item.self], inMemory: true)
+    .modelContainer(for: [Wallet.self, BillRecord.self, Subcategory.self, Subscription.self, Budget.self, SavingsGoal.self, SavingsPlan.self, Item.self, QuickRecord.self], inMemory: true)
 }

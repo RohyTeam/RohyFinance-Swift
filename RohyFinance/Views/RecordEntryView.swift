@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftData
+import UIKit
 
 /// The "记账" sheet: expense / income / transfer entry.
 struct RecordEntryView: View {
@@ -16,6 +17,7 @@ struct RecordEntryView: View {
     @Query private var subcategories: [Subcategory]
     @Query private var budgets: [Budget]
     @Query private var savingsGoals: [SavingsGoal]
+    @Query private var quickRecords: [QuickRecord]
     @AppStorage("defaultCurrency") private var defaultCurrencyRaw = Currency.defaultForLocale().rawValue
 
     @State private var kind: RecordKind = .expense
@@ -64,11 +66,22 @@ struct RecordEntryView: View {
 
     @State private var errorMessage: String?
 
+    // Template mode (quick record): optional image, no time editing.
+    @State private var imageData: Data?
+    @State private var showImagePicker = false
+    @State private var pickedImage: UIImage?
+
     /// Non-nil when editing an existing record.
     let record: BillRecord?
+    /// Non-nil when editing an existing quick record template.
+    let template: QuickRecord?
+    /// Whether this form edits a quick record template instead of a bill.
+    let templateMode: Bool
 
     init(record: BillRecord? = nil) {
         self.record = record
+        self.template = nil
+        self.templateMode = false
         guard let record else { return }
         _kind = State(initialValue: record.kind)
         _category = State(initialValue: CategoryStore.find(record.categoryKey))
@@ -112,6 +125,57 @@ struct RecordEntryView: View {
         if record.kind == .transfer {
             _sourceCurrency = State(initialValue: record.currency)
             _targetCurrency = State(initialValue: record.targetCurrencyRaw.flatMap(Currency.init(rawValue:)))
+        }
+    }
+
+    init(template: QuickRecord?) {
+        self.record = nil
+        self.template = template
+        self.templateMode = true
+        guard let template else { return }
+        let draft = template.draft
+        _kind = State(initialValue: draft.kind)
+        _category = State(initialValue: CategoryStore.find(draft.categoryKey))
+        _note = State(initialValue: draft.note)
+        _currency = State(initialValue: draft.currency)
+        _budget = State(initialValue: draft.budget)
+        _savingsGoal = State(initialValue: draft.savingsGoal)
+        _imageData = State(initialValue: template.imageData)
+        (_intPart, _fracPart) = Self.amountStates(draft.amount)
+        _wallet = State(initialValue: draft.wallet)
+        _targetWallet = State(initialValue: draft.targetWallet)
+        if let tax = draft.taxAmount {
+            _isPretax = State(initialValue: true)
+            (_taxInt, _taxFrac) = Self.amountStates(tax)
+        }
+        if let discount = draft.discountAmount {
+            _hasDiscount = State(initialValue: true)
+            (_discountInt, _discountFrac) = Self.amountStates(discount)
+        }
+        if let consumptionTax = draft.consumptionTaxAmount {
+            _excludesConsumptionTax = State(initialValue: true)
+            (_consumptionTaxInt, _consumptionTaxFrac) = Self.amountStates(consumptionTax)
+        }
+        if let fee = draft.feeAmount {
+            _needsFee = State(initialValue: true)
+            (_feeInt, _feeFrac) = Self.amountStates(fee)
+        }
+        if let convertedAmount = draft.convertedAmount {
+            _conversionMode = State(initialValue: .value)
+            (_convAmountInt, _convAmountFrac) = Self.amountStates(convertedAmount)
+            if let convertedTax = draft.convertedTaxAmount {
+                (_convTaxInt, _convTaxFrac) = Self.amountStates(convertedTax)
+            }
+            if let convertedDiscount = draft.convertedDiscountAmount {
+                (_convDiscountInt, _convDiscountFrac) = Self.amountStates(convertedDiscount)
+            }
+            if let convertedConsumptionTax = draft.convertedConsumptionTaxAmount {
+                (_convConsumptionTaxInt, _convConsumptionTaxFrac) = Self.amountStates(convertedConsumptionTax)
+            }
+        }
+        if draft.kind == .transfer {
+            _sourceCurrency = State(initialValue: draft.currency)
+            _targetCurrency = State(initialValue: draft.targetCurrencyRaw.flatMap(Currency.init(rawValue:)))
         }
     }
 
@@ -172,15 +236,23 @@ struct RecordEntryView: View {
                 if kind == .transfer {
                     Section {
                         HStack {
-                            Text("Note")
-                            TextField("Enter bill note", text: $note)
-                                .multilineTextAlignment(.trailing)
+                            if templateMode {
+                                imagePickerBox
+                                TextField("Enter bill note", text: $note)
+                                    .multilineTextAlignment(.trailing)
+                            } else {
+                                Text("Note")
+                                TextField("Enter bill note", text: $note)
+                                    .multilineTextAlignment(.trailing)
+                            }
                         }
                     }
 
-                    Section("Time") {
-                        DatePicker("Date", selection: $date, displayedComponents: .date)
-                        DatePicker("Time", selection: $date, displayedComponents: .hourAndMinute)
+                    if !templateMode {
+                        Section("Time") {
+                            DatePicker("Date", selection: $date, displayedComponents: .date)
+                            DatePicker("Time", selection: $date, displayedComponents: .hourAndMinute)
+                        }
                     }
 
                     Section("Source") {
@@ -209,9 +281,15 @@ struct RecordEntryView: View {
                 } else if kind == .saving {
                     Section("Info") {
                         HStack {
-                            Text("Note")
-                            TextField("Enter bill note", text: $note)
-                                .multilineTextAlignment(.trailing)
+                            if templateMode {
+                                imagePickerBox
+                                TextField("Enter bill note", text: $note)
+                                    .multilineTextAlignment(.trailing)
+                            } else {
+                                Text("Note")
+                                TextField("Enter bill note", text: $note)
+                                    .multilineTextAlignment(.trailing)
+                            }
                         }
 
                         Picker(selection: $savingsGoal) {
@@ -226,9 +304,11 @@ struct RecordEntryView: View {
                         .pickerStyle(.menu)
                     }
 
-                    Section("Time") {
-                        DatePicker("Date", selection: $date, displayedComponents: .date)
-                        DatePicker("Time", selection: $date, displayedComponents: .hourAndMinute)
+                    if !templateMode {
+                        Section("Time") {
+                            DatePicker("Date", selection: $date, displayedComponents: .date)
+                            DatePicker("Time", selection: $date, displayedComponents: .hourAndMinute)
+                        }
                     }
 
                     Section("Funds") {
@@ -257,15 +337,23 @@ struct RecordEntryView: View {
 
                     Section {
                         HStack {
-                            Text("Note")
-                            TextField("Enter bill note", text: $note)
-                                .multilineTextAlignment(.trailing)
+                            if templateMode {
+                                imagePickerBox
+                                TextField("Enter bill note", text: $note)
+                                    .multilineTextAlignment(.trailing)
+                            } else {
+                                Text("Note")
+                                TextField("Enter bill note", text: $note)
+                                    .multilineTextAlignment(.trailing)
+                            }
                         }
                     }
 
-                    Section("Time") {
-                        DatePicker("Date", selection: $date, displayedComponents: .date)
-                        DatePicker("Time", selection: $date, displayedComponents: .hourAndMinute)
+                    if !templateMode {
+                        Section("Time") {
+                            DatePicker("Date", selection: $date, displayedComponents: .date)
+                            DatePicker("Time", selection: $date, displayedComponents: .hourAndMinute)
+                        }
                     }
 
                     Section("Bills") {
@@ -331,7 +419,11 @@ struct RecordEntryView: View {
                     EmptyView()
                 }
             }
-            .navigationTitle(record == nil ? String(localized: "Record") : String(localized: "Edit Record"))
+            .navigationTitle(
+                templateMode
+                    ? (template == nil ? String(localized: "Add Quick Record") : String(localized: "Edit Quick Record"))
+                    : (record == nil ? String(localized: "Record") : String(localized: "Edit Record"))
+            )
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
@@ -357,6 +449,10 @@ struct RecordEntryView: View {
                 }
                 .pickerStyle(.segmented)
                 .padding()
+            }
+            .sheet(isPresented: $showImagePicker) {
+                ImagePicker(image: $pickedImage)
+                    .ignoresSafeArea()
             }
             .alert("Notice", isPresented: errorPresented) {
                 Button("OK") {}
@@ -400,11 +496,18 @@ struct RecordEntryView: View {
                     note = truncatedToCharacterCount(value, limit: 16)
                 }
             }
+            .onChange(of: pickedImage) { _, image in
+                guard let image else { return }
+                imageData = Self.squareImageData(image)
+                pickedImage = nil
+            }
             .onAppear {
-                applyDefaultWallet()
-                if subcategory == nil, let existingSubcategory = record?.subcategory {
+                if !templateMode {
+                    applyDefaultWallet()
+                }
+                if subcategory == nil, let existingSubcategory = record?.subcategory ?? template?.subcategory {
                     subcategory = subcategories.first {
-                        $0.name == existingSubcategory && $0.categoryKey == record?.categoryKey
+                        $0.name == existingSubcategory && $0.categoryKey == (record?.categoryKey ?? template?.categoryKey)
                     }
                 }
             }
@@ -767,9 +870,51 @@ struct RecordEntryView: View {
         }
     }
 
+    private var imagePickerBox: some View {
+        Button {
+            showImagePicker = true
+        } label: {
+            if let imageData, let image = UIImage(data: imageData) {
+                Image(uiImage: image)
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 96, height: 96)
+                    .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+            } else {
+                RoundedRectangle(cornerRadius: 20, style: .continuous)
+                    .strokeBorder(style: StrokeStyle(lineWidth: 1, dash: [4]))
+                    .foregroundStyle(.secondary)
+                    .frame(width: 96, height: 96)
+                    .overlay {
+                        Image(systemName: "photo")
+                            .font(.title2)
+                            .foregroundStyle(.secondary)
+                    }
+            }
+        }
+        .buttonStyle(.plain)
+    }
+
+    private static func squareImageData(_ image: UIImage) -> Data? {
+        let renderer = UIGraphicsImageRenderer(size: CGSize(width: 256, height: 256))
+        return renderer.pngData { _ in
+            image.draw(in: CGRect(x: 0, y: 0, width: 256, height: 256))
+        }
+    }
+
     /// Saves a draft: reverts the old balance effect when editing,
     /// applies the new effect, then dismisses.
     private func save(_ draft: RecordDraft) {
+        if templateMode {
+            if let template {
+                template.update(from: draft, imageData: imageData)
+            } else {
+                let nextOrder = (quickRecords.map(\.sortOrder).max() ?? -1) + 1
+                modelContext.insert(QuickRecord(draft: draft, imageData: imageData, sortOrder: nextOrder))
+            }
+            dismiss()
+            return
+        }
         if let editing = record {
             editing.revertBalanceEffect()
             editing.update(from: draft)
@@ -789,5 +934,5 @@ struct RecordEntryView: View {
 
 #Preview {
     RecordEntryView()
-        .modelContainer(for: [Wallet.self, BillRecord.self, Subcategory.self, Subscription.self, Budget.self, SavingsGoal.self, SavingsPlan.self, Item.self], inMemory: true)
+        .modelContainer(for: [Wallet.self, BillRecord.self, Subcategory.self, Subscription.self, Budget.self, SavingsGoal.self, SavingsPlan.self, Item.self, QuickRecord.self], inMemory: true)
 }

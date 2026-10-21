@@ -117,23 +117,27 @@ struct StatisticsView: View {
     var body: some View {
         NavigationStack {
             Group {
-                if availableMonths.isEmpty {
+                if availableMonths.isEmpty && wallets.isEmpty && items.isEmpty {
                     ContentUnavailableView("No Records", systemImage: "chart.pie", description: Text("Add a record to see statistics"))
                 } else {
                     ScrollView {
                         VStack(alignment: .leading, spacing: 24) {
-                            monthMenu
-                            statCard { assetSummary }
-                            statCard {
-                                VStack(spacing: 20) {
-                                    summaryRow
-                                    Divider()
-                                    charts
-                                    Divider()
-                                    comparison
-                                }
+                            if !availableMonths.isEmpty {
+                                monthMenu
                             }
-                            currencyBarChart
+                            statCard { assetSummary }
+                            if !availableMonths.isEmpty {
+                                statCard {
+                                    VStack(spacing: 20) {
+                                        summaryRow
+                                        Divider()
+                                        charts
+                                        Divider()
+                                        comparison
+                                    }
+                                }
+                                currencyBarChart
+                            }
                             budgetSection
                             savingsSection
                         }
@@ -538,5 +542,5 @@ struct SavingsGoalCard: View {
 
 #Preview {
     StatisticsView()
-        .modelContainer(for: [Wallet.self, BillRecord.self, Subcategory.self, Subscription.self, Budget.self, SavingsGoal.self, SavingsPlan.self, Item.self], inMemory: true)
+        .modelContainer(for: [Wallet.self, BillRecord.self, Subcategory.self, Subscription.self, Budget.self, SavingsGoal.self, SavingsPlan.self, Item.self, QuickRecord.self], inMemory: true)
 }
