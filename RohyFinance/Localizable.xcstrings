@@ -104,6 +104,16 @@
         }
       }
     },
+    "Add Sub-item": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "添加子物品"
+          }
+        }
+      }
+    },
     "Add Subcategory": {
       "localizations": {
         "zh-Hans": {
@@ -411,6 +421,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "换算方式"
+          }
+        }
+      }
+    },
+    "Convert to Sub-item": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "转为子物品"
           }
         }
       }
@@ -802,6 +822,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "金额格式不正确"
+          }
+        }
+      }
+    },
+    "Item Cost": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "物品成本"
           }
         }
       }
@@ -1310,6 +1340,16 @@
         }
       }
     },
+    "Purchased": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "购入"
+          }
+        }
+      }
+    },
     "Quarterly": {
       "localizations": {
         "zh-Hans": {
@@ -1346,6 +1386,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "记账"
+          }
+        }
+      }
+    },
+    "Remove from Sub-items": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "移出子物品"
           }
         }
       }
@@ -1580,6 +1630,26 @@
         }
       }
     },
+    "Sub-item Cost": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "子物品成本"
+          }
+        }
+      }
+    },
+    "Sub-items": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "子物品"
+          }
+        }
+      }
+    },
     "Subcategory": {
       "localizations": {
         "zh-Hans": {
@@ -1787,6 +1857,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "资产价值"
+          }
+        }
+      }
+    },
+    "Total Cost": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "总成本"
           }
         }
       }

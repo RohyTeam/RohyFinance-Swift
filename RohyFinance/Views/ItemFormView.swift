@@ -16,6 +16,8 @@ struct ItemFormView: View {
 
     /// Non-nil when editing an existing item.
     let item: Item?
+    /// Non-nil when creating a sub-item of this item.
+    let parent: Item?
 
     @State private var name = ""
     @State private var imageData: Data?
@@ -32,8 +34,9 @@ struct ItemFormView: View {
     @State private var status: ItemStatus = .inUse
     @State private var errorMessage: String?
 
-    init(item: Item? = nil) {
+    init(item: Item? = nil, parent: Item? = nil) {
         self.item = item
+        self.parent = parent
         if let item {
             _name = State(initialValue: item.name)
             _imageData = State(initialValue: item.imageData)
@@ -145,7 +148,11 @@ struct ItemFormView: View {
                     .pickerStyle(.menu)
                 }
             }
-            .navigationTitle(item == nil ? String(localized: "Add Item") : String(localized: "Edit Item"))
+            .navigationTitle(
+                item == nil
+                    ? (parent == nil ? String(localized: "Add Item") : String(localized: "Add Sub-item"))
+                    : String(localized: "Edit Item")
+            )
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
@@ -275,7 +282,7 @@ struct ItemFormView: View {
             item.warrantyEndDate = warrantyEndDate
             item.statusRaw = status.rawValue
         } else {
-            modelContext.insert(Item(
+            let newItem = Item(
                 name: trimmed,
                 imageData: imageData,
                 record: record,
@@ -285,7 +292,9 @@ struct ItemFormView: View {
                 retirementDate: retirementDate,
                 warrantyEndDate: warrantyEndDate,
                 status: status
-            ))
+            )
+            newItem.parent = parent
+            modelContext.insert(newItem)
         }
         dismiss()
     }

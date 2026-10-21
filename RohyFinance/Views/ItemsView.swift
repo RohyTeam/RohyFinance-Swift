@@ -8,38 +8,55 @@
 import SwiftUI
 import SwiftData
 
-/// The items (物品) tab: a grid of all items with add/edit/delete.
+/// The items (物品) tab: a grid of all top-level items with add/edit/delete.
 struct ItemsView: View {
     @Environment(\.modelContext) private var modelContext
     @Query private var items: [Item]
     @State private var showAddItem = false
     @State private var editingItem: Item?
+    @State private var convertingItem: Item?
+    @Namespace private var namespace
+
+    private var topLevelItems: [Item] {
+        items.filter { $0.parent == nil }
+    }
 
     var body: some View {
         NavigationStack {
             Group {
-                if items.isEmpty {
+                if topLevelItems.isEmpty {
                     ContentUnavailableView("No Items", systemImage: "shippingbox")
                 } else {
                     ScrollView {
                         LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 12) {
-                            ForEach(items) { item in
-                                ItemCell(item: item)
-                                    .background(Color(.secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 12, style: .continuous))
-                                    .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
-                                    .contentShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
-                                    .contextMenu {
-                                        Button {
-                                            editingItem = item
-                                        } label: {
-                                            Label("Edit", systemImage: "pencil")
-                                        }
-                                        Button(role: .destructive) {
-                                            modelContext.delete(item)
-                                        } label: {
-                                            Label("Delete", systemImage: "trash")
-                                        }
+                            ForEach(topLevelItems) { item in
+                                NavigationLink {
+                                    ItemDetailView(item: item)
+                                        .navigationTransition(.zoom(sourceID: item.id, in: namespace))
+                                } label: {
+                                    ItemCell(item: item)
+                                        .background(Color(.secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 12, style: .continuous))
+                                        .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+                                        .matchedTransitionSource(id: item.id, in: namespace)
+                                }
+                                .buttonStyle(.plain)
+                                .contextMenu {
+                                    Button {
+                                        convertingItem = item
+                                    } label: {
+                                        Label("Convert to Sub-item", systemImage: "arrow.turn.down.right")
                                     }
+                                    Button {
+                                        editingItem = item
+                                    } label: {
+                                        Label("Edit", systemImage: "pencil")
+                                    }
+                                    Button(role: .destructive) {
+                                        modelContext.delete(item)
+                                    } label: {
+                                        Label("Delete", systemImage: "trash")
+                                    }
+                                }
                             }
                         }
                         .padding()
@@ -64,6 +81,10 @@ struct ItemsView: View {
             }
             .sheet(item: $editingItem) { item in
                 ItemFormView(item: item)
+                    .presentationDetents([.large])
+            }
+            .sheet(item: $convertingItem) { item in
+                ParentItemPickerView(item: item)
                     .presentationDetents([.large])
             }
         }

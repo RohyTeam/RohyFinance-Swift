@@ -52,6 +52,10 @@ final class Item {
     var retirementDate: Date?
     var warrantyEndDate: Date?
     var statusRaw: String = ItemStatus.inUse.rawValue
+    /// Parent item when this is a sub-item (子物品).
+    var parent: Item?
+    @Relationship(deleteRule: .nullify, inverse: \Item.parent)
+    var children: [Item]? = []
 
     init(name: String, imageData: Data?, record: BillRecord?, currency: Currency, value: Double, purchaseDate: Date, retirementDate: Date?, warrantyEndDate: Date?, status: ItemStatus) {
         self.name = name
@@ -89,5 +93,15 @@ final class Item {
     /// Days since purchase.
     var daysInUse: Int {
         max(0, Calendar.current.dateComponents([.day], from: displayPurchaseDate, to: .now).day ?? 0)
+    }
+
+    /// Sum of all sub-items' values.
+    var childrenCost: Double {
+        (children ?? []).reduce(0) { $0 + $1.displayValue }
+    }
+
+    /// Own value plus sub-items.
+    var totalCost: Double {
+        displayValue + childrenCost
     }
 }
