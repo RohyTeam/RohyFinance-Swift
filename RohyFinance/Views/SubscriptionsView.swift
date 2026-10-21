@@ -36,6 +36,7 @@ struct SubscriptionsView: View {
                 }
             }
             .navigationTitle("Subscriptions")
+            .settingsButton()
             .overlay {
                 if subscriptions.isEmpty {
                     ContentUnavailableView("No Subscriptions", systemImage: "repeat", description: Text("Your subscriptions will appear here"))
@@ -136,22 +137,6 @@ struct SubscriptionIcon: View {
     }
 }
 
-/// Preset icons bundled with the app, sorted by asset id.
-private let presetIcons: [(asset: String, name: String)] = [
-    ("aliyun_drive", String(localized: "Aliyun Drive")),
-    ("apple_music", "Apple Music"),
-    ("baidu_netdisk", String(localized: "Baidu Netdisk")),
-    ("bandizip_365", "Bandizip 365"),
-    ("bilibili", String(localized: "Bilibili")),
-    ("icloud", "iCloud"),
-    ("kugou_music", String(localized: "Kugou Music")),
-    ("netease_cloud_music", String(localized: "NetEase Cloud Music")),
-    ("qqmusic", String(localized: "QQ Music")),
-    ("quark_cloud_disk", String(localized: "Quark Cloud Disk")),
-    ("soda_music", String(localized: "Soda Music")),
-    ("spotify", "Spotify"),
-]
-
 /// Form for adding or editing a subscription.
 struct SubscriptionFormView: View {
     @Environment(\.modelContext) private var modelContext
@@ -179,6 +164,8 @@ struct SubscriptionFormView: View {
     @State private var startDate = Date.now
     @State private var period: SubscriptionPeriod = .monthly
     @State private var advanceDays = 0
+    /// Creation only: whether to backfill records between the start date and now.
+    @State private var autoBackfill = true
 
     @State private var errorMessage: String?
 
@@ -217,11 +204,16 @@ struct SubscriptionFormView: View {
     var body: some View {
         NavigationStack {
             Form {
-                Section("Info") {
+                Section {
                     HStack(spacing: 12) {
                         imagePickerBox
                         TextField("Name", text: $name)
                     }
+                } header: {
+                    Text("Info")
+                } footer: {
+                    Link("Need an app icon? Tap to get one", destination: URL(string: "https://jiejingku.net/icon/")!)
+                        .font(.footnote)
                 }
 
                 Section("Payment") {
@@ -269,7 +261,6 @@ struct SubscriptionFormView: View {
 
                 Section("Cycle") {
                     DatePicker("Start Date", selection: $startDate, displayedComponents: .date)
-
                     Picker(selection: $period) {
                         ForEach(SubscriptionPeriod.allCases) { period in
                             Text(period.localizedName).tag(period)
@@ -288,6 +279,10 @@ struct SubscriptionFormView: View {
                         Text("Renewal Date")
                     }
                     .pickerStyle(.menu)
+
+                    if subscription == nil {
+                        Toggle("Backfill subscription records", isOn: $autoBackfill)
+                    }
                 }
             }
             .navigationTitle(subscription == nil ? "Add Subscription" : "Edit Subscription")
@@ -356,32 +351,12 @@ struct SubscriptionFormView: View {
     }
 
     private var imagePickerBox: some View {
-        Menu {
-            Button {
-                showImagePicker = true
-            } label: {
-                Label("Library", systemImage: "photo")
-            }
-            Menu {
-                ForEach(presetIcons, id: \.asset) { preset in
-                    Button {
-                        presetIcon = preset.asset
-                        imageData = nil
-                    } label: {
-                        Label {
-                            Text(preset.name)
-                        } icon: {
-                            roundedAssetImage(preset.asset)
-                                .frame(width: 20, height: 20)
-                        }
-                    }
-                }
-            } label: {
-                Label("Preset", systemImage: "square.grid.2x2")
-            }
+        Button {
+            showImagePicker = true
         } label: {
             previewBox
         }
+        .buttonStyle(.plain)
     }
 
     @ViewBuilder
@@ -391,12 +366,6 @@ struct SubscriptionFormView: View {
             Image(uiImage: image)
                 .resizable()
                 .scaledToFill()
-                .frame(width: size, height: size)
-                .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
-        } else if let presetIcon {
-            Image(presetIcon)
-                .resizable()
-                .scaledToFit()
                 .frame(width: size, height: size)
                 .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
         } else {
@@ -515,6 +484,10 @@ struct SubscriptionFormView: View {
             subscription.startDate = startDate
             subscription.periodDays = period.rawValue
             subscription.advanceDays = advanceDays
+            // Editing never backfills: skip everything up to now.
+            if subscription.lastGeneratedDate == nil {
+                subscription.lastGeneratedDate = .now
+            }
         } else {
             let subscription = Subscription(
                 name: trimmed,
@@ -529,6 +502,11 @@ struct SubscriptionFormView: View {
                 advanceDays: advanceDays,
                 isEnabled: true
             )
+            if !autoBackfill {
+                // Skip records between the start date and now; only future
+                // renewals will be generated.
+                subscription.lastGeneratedDate = .now
+            }
             modelContext.insert(subscription)
             SubscriptionBilling.generateDueBills(context: modelContext)
         }
@@ -542,5 +520,5 @@ struct SubscriptionFormView: View {
 
 #Preview {
     SubscriptionsView()
-        .modelContainer(for: [Wallet.self, BillRecord.self, Subcategory.self, Subscription.self, Budget.self], inMemory: true)
+        .modelContainer(for: [Wallet.self, BillRecord.self, Subcategory.self, Subscription.self, Budget.self, SavingsGoal.self, SavingsPlan.self, Item.self], inMemory: true)
 }

@@ -26,8 +26,8 @@ struct ContentView: View {
             Tab("Assets", systemImage: "wallet.pass") {
                 WalletsView()
             }
-            Tab("Profile", systemImage: "person.crop.circle") {
-                ProfileView()
+            Tab("Items", systemImage: "shippingbox") {
+                ItemsView()
             }
         }
         .tabViewBottomAccessory {
@@ -43,6 +43,7 @@ struct ContentView: View {
         }
         .task {
             SubscriptionBilling.generateDueBills(context: modelContext)
+            SavingsSettlement.processCompletedPeriods(context: modelContext)
         }
     }
 }
@@ -59,5 +60,5 @@ struct PlaceholderView: View {
 
 #Preview {
     ContentView()
-        .modelContainer(for: [Wallet.self, BillRecord.self, Subcategory.self, Subscription.self, Budget.self], inMemory: true)
+        .modelContainer(for: [Wallet.self, BillRecord.self, Subcategory.self, Subscription.self, Budget.self, SavingsGoal.self, SavingsPlan.self, Item.self], inMemory: true)
 }

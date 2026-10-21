@@ -53,6 +53,7 @@ struct BudgetFormView: View {
                     HStack {
                         Text("Name")
                         TextField("Enter name", text: $name)
+                            .multilineTextAlignment(.trailing)
                     }
                 }
 
@@ -210,5 +211,5 @@ struct BudgetFormView: View {
 
 #Preview {
     BudgetFormView()
-        .modelContainer(for: [Wallet.self, BillRecord.self, Subcategory.self, Subscription.self, Budget.self], inMemory: true)
+        .modelContainer(for: [Wallet.self, BillRecord.self, Subcategory.self, Subscription.self, Budget.self, SavingsGoal.self, SavingsPlan.self, Item.self], inMemory: true)
 }

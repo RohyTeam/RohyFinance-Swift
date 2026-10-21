@@ -39,7 +39,7 @@ struct RecordCalendarView: View {
             switch record.kind {
             case .income: result[day, default: 0] += record.effective(in: defaultCurrency)
             case .expense: result[day, default: 0] -= record.effective(in: defaultCurrency)
-            case .transfer: break
+            case .transfer, .saving: break
             }
         }
         return result

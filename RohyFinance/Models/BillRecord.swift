@@ -12,6 +12,7 @@ enum RecordKind: String, Codable, CaseIterable, Identifiable {
     case expense
     case income
     case transfer
+    case saving
 
     var id: String { rawValue }
 
@@ -20,6 +21,7 @@ enum RecordKind: String, Codable, CaseIterable, Identifiable {
         case .expense: return String(localized: "Expense")
         case .income: return String(localized: "Income")
         case .transfer: return String(localized: "Transfer")
+        case .saving: return String(localized: "Saving")
         }
     }
 }
@@ -41,6 +43,8 @@ final class BillRecord {
     var subscription: Subscription?
     /// The budget this record counts towards (optional).
     var budget: Budget?
+    /// The savings goal this record feeds into (kind == .saving).
+    var savingsGoal: SavingsGoal?
     /// Income: tax deducted from the pre-tax amount.
     var taxAmount: Double?
     /// Expense: discount deducted from the original price.
@@ -55,7 +59,7 @@ final class BillRecord {
     var convertedDiscountAmount: Double?
     var convertedConsumptionTaxAmount: Double?
 
-    init(kind: RecordKind, amount: Double, currency: Currency, categoryKey: String, subcategory: String?, note: String, date: Date, wallet: Wallet?, targetWallet: Wallet? = nil, targetCurrencyRaw: String? = nil, budget: Budget? = nil, taxAmount: Double? = nil, discountAmount: Double? = nil, consumptionTaxAmount: Double? = nil, feeAmount: Double? = nil, convertedAmount: Double? = nil, convertedTaxAmount: Double? = nil, convertedDiscountAmount: Double? = nil, convertedConsumptionTaxAmount: Double? = nil) {
+    init(kind: RecordKind, amount: Double, currency: Currency, categoryKey: String, subcategory: String?, note: String, date: Date, wallet: Wallet?, targetWallet: Wallet? = nil, targetCurrencyRaw: String? = nil, budget: Budget? = nil, savingsGoal: SavingsGoal? = nil, taxAmount: Double? = nil, discountAmount: Double? = nil, consumptionTaxAmount: Double? = nil, feeAmount: Double? = nil, convertedAmount: Double? = nil, convertedTaxAmount: Double? = nil, convertedDiscountAmount: Double? = nil, convertedConsumptionTaxAmount: Double? = nil) {
         self.kindRaw = kind.rawValue
         self.amount = amount
         self.currencyRaw = currency.rawValue
@@ -67,6 +71,7 @@ final class BillRecord {
         self.targetWallet = targetWallet
         self.targetCurrencyRaw = targetCurrencyRaw
         self.budget = budget
+        self.savingsGoal = savingsGoal
         self.taxAmount = taxAmount
         self.discountAmount = discountAmount
         self.consumptionTaxAmount = consumptionTaxAmount
@@ -92,7 +97,7 @@ final class BillRecord {
             return amount - (taxAmount ?? 0)
         case .expense:
             return amount - (discountAmount ?? 0) + (consumptionTaxAmount ?? 0)
-        case .transfer:
+        case .transfer, .saving:
             return amount
         }
     }
@@ -107,6 +112,8 @@ final class BillRecord {
             return (convertedAmount ?? amount) - (convertedDiscountAmount ?? 0) + (convertedConsumptionTaxAmount ?? 0)
         case .transfer:
             return convertedAmount ?? amount
+        case .saving:
+            return amount
         }
     }
 
@@ -125,6 +132,9 @@ final class BillRecord {
         case .transfer:
             wallet?.adjust(currency, by: -(amount + (feeAmount ?? 0)))
             targetWallet?.adjust(targetCurrency, by: convertedAmount ?? amount)
+        case .saving:
+            // Savings do not touch wallet balances.
+            break
         }
     }
 
@@ -138,6 +148,8 @@ final class BillRecord {
         case .transfer:
             wallet?.adjust(currency, by: amount + (feeAmount ?? 0))
             targetWallet?.adjust(targetCurrency, by: -(convertedAmount ?? amount))
+        case .saving:
+            break
         }
     }
 
@@ -154,6 +166,7 @@ final class BillRecord {
         targetWallet = draft.targetWallet
         targetCurrencyRaw = draft.targetCurrencyRaw
         budget = draft.budget
+        savingsGoal = draft.savingsGoal
         taxAmount = draft.taxAmount
         discountAmount = draft.discountAmount
         consumptionTaxAmount = draft.consumptionTaxAmount
@@ -181,6 +194,7 @@ struct RecordDraft {
     var targetWallet: Wallet? = nil
     var targetCurrencyRaw: String? = nil
     var budget: Budget? = nil
+    var savingsGoal: SavingsGoal? = nil
     var taxAmount: Double? = nil
     var discountAmount: Double? = nil
     var consumptionTaxAmount: Double? = nil
@@ -197,7 +211,7 @@ struct RecordDraft {
             return amount - (taxAmount ?? 0)
         case .expense:
             return amount - (discountAmount ?? 0) + (consumptionTaxAmount ?? 0)
-        case .transfer:
+        case .transfer, .saving:
             return amount
         }
     }
@@ -216,6 +230,8 @@ struct RecordDraft {
         case .transfer:
             wallet?.adjust(currency, by: -(amount + (feeAmount ?? 0)))
             targetWallet?.adjust(targetCurrency, by: convertedAmount ?? amount)
+        case .saving:
+            break
         }
     }
 
@@ -233,6 +249,7 @@ struct RecordDraft {
             targetWallet: targetWallet,
             targetCurrencyRaw: targetCurrencyRaw,
             budget: budget,
+            savingsGoal: savingsGoal,
             taxAmount: taxAmount,
             discountAmount: discountAmount,
             consumptionTaxAmount: consumptionTaxAmount,

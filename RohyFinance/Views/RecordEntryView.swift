@@ -15,6 +15,7 @@ struct RecordEntryView: View {
     @Query private var wallets: [Wallet]
     @Query private var subcategories: [Subcategory]
     @Query private var budgets: [Budget]
+    @Query private var savingsGoals: [SavingsGoal]
     @AppStorage("defaultCurrency") private var defaultCurrencyRaw = Currency.defaultForLocale().rawValue
 
     @State private var kind: RecordKind = .expense
@@ -23,6 +24,7 @@ struct RecordEntryView: View {
     @State private var note = ""
     @State private var currency: Currency?
     @State private var budget: Budget?
+    @State private var savingsGoal: SavingsGoal?
     @State private var intPart = ""
     @State private var fracPart = ""
     @State private var wallet: Wallet?
@@ -73,6 +75,7 @@ struct RecordEntryView: View {
         _note = State(initialValue: record.note)
         _currency = State(initialValue: record.currency)
         _budget = State(initialValue: record.budget)
+        _savingsGoal = State(initialValue: record.savingsGoal)
         (_intPart, _fracPart) = Self.amountStates(record.amount)
         _wallet = State(initialValue: record.wallet)
         _targetWallet = State(initialValue: record.targetWallet)
@@ -136,8 +139,13 @@ struct RecordEntryView: View {
     }
 
     /// All wallets can be picked; the currency choice is filtered afterwards.
+    /// For savings, only wallets supporting the goal's currency are listed.
     private var availableWallets: [Wallet] {
-        wallets
+        if kind == .saving {
+            guard let savingsGoal else { return [] }
+            return wallets.filter { $0.supports(savingsGoal.currency) }
+        }
+        return wallets
     }
 
     private var resolvedSourceCurrency: Currency? {
@@ -166,6 +174,7 @@ struct RecordEntryView: View {
                         HStack {
                             Text("Note")
                             TextField("Enter bill note", text: $note)
+                                .multilineTextAlignment(.trailing)
                         }
                     }
 
@@ -197,6 +206,49 @@ struct RecordEntryView: View {
                             }
                         }
                     }
+                } else if kind == .saving {
+                    Section("Info") {
+                        HStack {
+                            Text("Note")
+                            TextField("Enter bill note", text: $note)
+                                .multilineTextAlignment(.trailing)
+                        }
+
+                        Picker(selection: $savingsGoal) {
+                            Text("Select").tag(SavingsGoal?.none)
+                            ForEach(savingsGoals) { goal in
+                                Text("\(goal.currency.symbol) \(goal.name)")
+                                    .tag(SavingsGoal?.some(goal))
+                            }
+                        } label: {
+                            Text("Savings Goal")
+                        }
+                        .pickerStyle(.menu)
+                    }
+
+                    Section("Time") {
+                        DatePicker("Date", selection: $date, displayedComponents: .date)
+                        DatePicker("Time", selection: $date, displayedComponents: .hourAndMinute)
+                    }
+
+                    Section("Funds") {
+                        walletPicker("Wallet", selection: $wallet)
+
+                        Picker(selection: .constant(savingsGoal?.currency)) {
+                            if let goalCurrency = savingsGoal?.currency {
+                                Text("\(goalCurrency.symbol) \(goalCurrency.localizedName)")
+                                    .tag(Currency?.some(goalCurrency))
+                            } else {
+                                Text("Select").tag(Currency?.none)
+                            }
+                        } label: {
+                            Text("Currency")
+                        }
+                        .pickerStyle(.menu)
+                        .disabled(true)
+
+                        amountRow(Text("Amount"), intPart: $intPart, fracPart: $fracPart)
+                    }
                 } else {
                     Section("Category") {
                         CategoryGrid(categories: categories, selection: $category)
@@ -207,6 +259,7 @@ struct RecordEntryView: View {
                         HStack {
                             Text("Note")
                             TextField("Enter bill note", text: $note)
+                                .multilineTextAlignment(.trailing)
                         }
                     }
 
@@ -274,6 +327,8 @@ struct RecordEntryView: View {
                             amountRow(Text("Fee amount"), intPart: $feeInt, fracPart: $feeFrac)
                         }
                     }
+                case .saving:
+                    EmptyView()
                 }
             }
             .navigationTitle(record == nil ? String(localized: "Record") : String(localized: "Edit Record"))
@@ -317,6 +372,7 @@ struct RecordEntryView: View {
                 sourceCurrency = nil
                 targetCurrency = nil
                 budget = nil
+                savingsGoal = nil
                 applyDefaultWallet()
             }
             .onChange(of: category) { _, _ in
@@ -332,6 +388,9 @@ struct RecordEntryView: View {
             }
             .onChange(of: currency) { _, _ in
                 budget = nil
+            }
+            .onChange(of: savingsGoal) { _, _ in
+                wallet = nil
             }
             .onChange(of: targetWallet) { _, newValue in
                 targetCurrency = resolveCurrency(for: newValue, current: targetCurrency)
@@ -376,7 +435,7 @@ struct RecordEntryView: View {
     /// Preselects the default wallet (and its default currency) when creating
     /// a new expense/income record.
     private func applyDefaultWallet() {
-        guard record == nil, kind != .transfer, wallet == nil,
+        guard record == nil, kind == .expense || kind == .income, wallet == nil,
               let defaultWallet = wallets.first(where: { $0.isDefault }) else { return }
         wallet = defaultWallet
         currency = defaultWallet.defaultCurrency
@@ -490,6 +549,7 @@ struct RecordEntryView: View {
             Text(title)
         }
         .pickerStyle(.menu)
+        .disabled(kind == .saving && savingsGoal == nil)
     }
 
     @ViewBuilder
@@ -680,6 +740,30 @@ struct RecordEntryView: View {
                 convertedAmount: convertedAmount
             )
             save(draft)
+        case .saving:
+            guard let savingsGoal else {
+                return fail(String(localized: "Please select a savings goal"))
+            }
+            guard !trimmedNote.isEmpty else {
+                return fail(String(localized: "Please enter a note"))
+            }
+            guard amount > 0 else {
+                return fail(String(localized: "Please enter an amount"))
+            }
+            guard let wallet else {
+                return fail(String(localized: "Please select a wallet"))
+            }
+            let draft = RecordDraft(
+                kind: .saving,
+                amount: amount,
+                currency: savingsGoal.currency,
+                categoryKey: "",
+                note: trimmedNote,
+                date: date,
+                wallet: wallet,
+                savingsGoal: savingsGoal
+            )
+            save(draft)
         }
     }
 
@@ -705,5 +789,5 @@ struct RecordEntryView: View {
 
 #Preview {
     RecordEntryView()
-        .modelContainer(for: [Wallet.self, BillRecord.self, Subcategory.self, Subscription.self, Budget.self], inMemory: true)
+        .modelContainer(for: [Wallet.self, BillRecord.self, Subcategory.self, Subscription.self, Budget.self, SavingsGoal.self, SavingsPlan.self, Item.self], inMemory: true)
 }

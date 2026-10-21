@@ -13,11 +13,13 @@ struct WalletsView: View {
     @Query private var wallets: [Wallet]
     @Query private var records: [BillRecord]
     @Query private var budgets: [Budget]
+    @Query private var savingsGoals: [SavingsGoal]
     @State private var showAddWallet = false
     @State private var showAddBudget = false
-    @State private var showSavingsComingSoon = false
+    @State private var showAddSavingsGoal = false
     @State private var editingWallet: Wallet?
     @State private var editingBudget: Budget?
+    @State private var editingSavingsGoal: SavingsGoal?
     @State private var errorMessage: String?
 
     private var sortedWallets: [Wallet] {
@@ -34,6 +36,7 @@ struct WalletsView: View {
                 }
             }
             .navigationTitle("Assets")
+            .settingsButton()
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Menu {
@@ -48,7 +51,7 @@ struct WalletsView: View {
                             Label("Add Budget", systemImage: "chart.pie")
                         }
                         Button {
-                            showSavingsComingSoon = true
+                            showAddSavingsGoal = true
                         } label: {
                             Label("Add Savings Goal", systemImage: "chart.line.uptrend.xyaxis")
                         }
@@ -69,10 +72,13 @@ struct WalletsView: View {
                 BudgetFormView(budget: budget)
                     .presentationDetents([.large])
             }
-            .alert("Notice", isPresented: $showSavingsComingSoon) {
-                Button("OK") {}
-            } message: {
-                Text("Coming Soon")
+            .sheet(isPresented: $showAddSavingsGoal) {
+                SavingsGoalFormView()
+                    .presentationDetents([.large])
+            }
+            .sheet(item: $editingSavingsGoal) { goal in
+                SavingsGoalFormView(goal: goal)
+                    .presentationDetents([.large])
             }
             .sheet(item: $editingWallet) { wallet in
                 WalletFormView(wallet: wallet)
@@ -133,20 +139,24 @@ struct WalletsView: View {
             if !budgets.isEmpty {
                 Section("Budgets") {
                     ForEach(budgets) { budget in
-                        HStack(spacing: 12) {
-                            Image(systemName: budget.icon)
-                                .frame(width: 32, height: 32)
-                            Text(budget.name)
-                            Spacer()
-                            VStack(alignment: .trailing, spacing: 2) {
-                                Text(moneyText(budget.amount, currency: budget.currency))
+                        NavigationLink {
+                            BudgetSavingsView(budget: budget)
+                        } label: {
+                            HStack(spacing: 12) {
+                                Image(systemName: budget.icon)
+                                    .frame(width: 32, height: 32)
+                                Text(budget.name)
+                                Spacer()
+                                VStack(alignment: .trailing, spacing: 2) {
+                                    Text(moneyText(budget.amount, currency: budget.currency))
+                                        .foregroundStyle(.secondary)
+                                    HStack(spacing: 4) {
+                                        WalletIconView(wallet: budget.wallet, size: 12)
+                                        Text("\(budget.wallet?.displayName ?? "-") · \(budget.period.localizedName)")
+                                    }
+                                    .font(.caption)
                                     .foregroundStyle(.secondary)
-                                HStack(spacing: 4) {
-                                    WalletIconView(wallet: budget.wallet, size: 12)
-                                    Text("\(budget.wallet?.displayName ?? "-") · \(budget.period.localizedName)")
                                 }
-                                .font(.caption)
-                                .foregroundStyle(.secondary)
                             }
                         }
                         .swipeActions {
@@ -165,7 +175,46 @@ struct WalletsView: View {
                     }
                 }
             }
+
+            if !savingsGoals.isEmpty {
+                Section("Savings Goals") {
+                    ForEach(savingsGoals) { goal in
+                        HStack(spacing: 12) {
+                            GoalIcon(goal: goal, size: 32)
+                            Text(goal.name)
+                            Spacer()
+                            VStack(alignment: .trailing, spacing: 2) {
+                                Text(moneyText(goal.amount, currency: goal.currency))
+                                    .foregroundStyle(.secondary)
+                                Text("\(String(localized: "Saved")) \(moneyText(savedAmount(for: goal), currency: goal.currency))")
+                                    .font(.caption)
+                                    .foregroundStyle(.secondary)
+                            }
+                        }
+                        .swipeActions {
+                            Button(role: .destructive) {
+                                modelContext.delete(goal)
+                            } label: {
+                                Label("Delete", systemImage: "trash")
+                            }
+                            Button {
+                                editingSavingsGoal = goal
+                            } label: {
+                                Label("Edit", systemImage: "pencil")
+                            }
+                            .tint(.orange)
+                        }
+                    }
+                }
+            }
         }
+    }
+
+    /// Total saved into a goal so far (all time, saving records only).
+    private func savedAmount(for goal: SavingsGoal) -> Double {
+        records
+            .filter { $0.savingsGoal === goal && $0.kind == .saving }
+            .reduce(0) { $0 + $1.effectiveAmount }
     }
 
     private func delete(_ wallet: Wallet) {
@@ -276,6 +325,7 @@ struct WalletFormView: View {
                 HStack {
                     Text("Name")
                     TextField("Enter name", text: $name)
+                        .multilineTextAlignment(.trailing)
                 }
 
                 HStack {
@@ -470,5 +520,5 @@ struct WalletFormView: View {
 
 #Preview {
     WalletsView()
-        .modelContainer(for: [Wallet.self, BillRecord.self, Subcategory.self, Subscription.self, Budget.self], inMemory: true)
+        .modelContainer(for: [Wallet.self, BillRecord.self, Subcategory.self, Subscription.self, Budget.self, SavingsGoal.self, SavingsPlan.self, Item.self], inMemory: true)
 }

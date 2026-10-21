@@ -67,6 +67,10 @@ final class Budget {
     var currencyRaw: String = Currency.cny.rawValue
     var amount: Double = 0
     var periodRaw: String = BudgetPeriod.monthly.rawValue
+    /// When the budget was created; only periods ending after this are settled.
+    var createdAt: Date = Date.now
+    /// End of the last period whose leftover has been distributed to savings plans.
+    var lastSavingsProcessed: Date?
 
     init(icon: String, name: String, wallet: Wallet?, currency: Currency, amount: Double, period: BudgetPeriod) {
         self.icon = icon

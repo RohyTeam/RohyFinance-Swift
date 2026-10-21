@@ -64,12 +64,32 @@
         }
       }
     },
+    "Add Item": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "添加物品"
+          }
+        }
+      }
+    },
     "Add Savings Goal": {
       "localizations": {
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
             "value": "添加攒钱"
+          }
+        }
+      }
+    },
+    "Add Savings Plan": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "添加攒钱计划"
           }
         }
       }
@@ -134,12 +154,22 @@
         }
       }
     },
-    "Aliyun Drive": {
+    "All": {
       "localizations": {
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "阿里云盘"
+            "value": "全部"
+          }
+        }
+      }
+    },
+    "All Remaining": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "剩余全部"
           }
         }
       }
@@ -159,7 +189,7 @@
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "资产"
+            "value": "资金"
           }
         }
       }
@@ -184,12 +214,22 @@
         }
       }
     },
-    "Baidu Netdisk": {
+    "Auto Saving": {
       "localizations": {
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "百度网盘"
+            "value": "自动攒钱"
+          }
+        }
+      }
+    },
+    "Backfill subscription records": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "自动补充订阅记账"
           }
         }
       }
@@ -204,22 +244,32 @@
         }
       }
     },
-    "Bilibili": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "哔哩哔哩"
-          }
-        }
-      }
-    },
     "Bills": {
       "localizations": {
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
             "value": "账单"
+          }
+        }
+      }
+    },
+    "Bind Record": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "绑定账单"
+          }
+        }
+      }
+    },
+    "Bound Record": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已绑定账单"
           }
         }
       }
@@ -375,12 +425,32 @@
         }
       }
     },
+    "Damaged": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已损坏"
+          }
+        }
+      }
+    },
     "Date": {
       "localizations": {
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
             "value": "日期"
+          }
+        }
+      }
+    },
+    "Days in use: %lld": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已使用时间：%lld 天"
           }
         }
       }
@@ -485,12 +555,32 @@
         }
       }
     },
+    "Edit Item": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "编辑物品"
+          }
+        }
+      }
+    },
     "Edit Record": {
       "localizations": {
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
             "value": "编辑账单"
+          }
+        }
+      }
+    },
+    "Edit Savings Goal": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "编辑攒钱"
           }
         }
       }
@@ -595,6 +685,26 @@
         }
       }
     },
+    "Funds": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "资金"
+          }
+        }
+      }
+    },
+    "Goal": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "目标"
+          }
+        }
+      }
+    },
     "Hong Kong Dollar": {
       "localizations": {
         "zh-Hans": {
@@ -611,6 +721,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "中国工商银行"
+          }
+        }
+      }
+    },
+    "In Use": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "正在使用"
           }
         }
       }
@@ -676,6 +796,16 @@
         }
       }
     },
+    "Items": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "物品"
+          }
+        }
+      }
+    },
     "Japanese Yen": {
       "localizations": {
         "zh-Hans": {
@@ -696,17 +826,8 @@
         }
       }
     },
-    "Kugou Music": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "酷狗音乐"
-          }
-        }
-      }
-    },
     "Library": {
+      "extractionState": "stale",
       "localizations": {
         "zh-Hans": {
           "stringUnit": {
@@ -767,12 +888,12 @@
         }
       }
     },
-    "NetEase Cloud Music": {
+    "Need an app icon? Tap to get one": {
       "localizations": {
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "网易云音乐"
+            "value": "需要应用图标？点击获取应用图标"
           }
         }
       }
@@ -797,12 +918,32 @@
         }
       }
     },
+    "No Items": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "暂无物品"
+          }
+        }
+      }
+    },
     "No Records": {
       "localizations": {
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
             "value": "暂无记录"
+          }
+        }
+      }
+    },
+    "No Savings Plans": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "当前暂无攒钱计划"
           }
         }
       }
@@ -863,6 +1004,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "无"
+          }
+        }
+      }
+    },
+    "Not selected": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "未选择"
           }
         }
       }
@@ -1037,6 +1188,16 @@
         }
       }
     },
+    "Please select a savings goal": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "请选择攒钱"
+          }
+        }
+      }
+    },
     "Please select a source": {
       "localizations": {
         "zh-Hans": {
@@ -1099,6 +1260,7 @@
       }
     },
     "Preset": {
+      "extractionState": "stale",
       "localizations": {
         "zh-Hans": {
           "stringUnit": {
@@ -1108,32 +1270,12 @@
         }
       }
     },
-    "Profile": {
+    "Purchase Date": {
       "localizations": {
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "我的"
-          }
-        }
-      }
-    },
-    "QQ Music": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "QQ音乐"
-          }
-        }
-      }
-    },
-    "Quark Cloud Disk": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "夸克网盘"
+            "value": "购买时间"
           }
         }
       }
@@ -1198,6 +1340,16 @@
         }
       }
     },
+    "Retirement Date": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "预计退役时间"
+          }
+        }
+      }
+    },
     "Same day": {
       "localizations": {
         "zh-Hans": {
@@ -1218,12 +1370,72 @@
         }
       }
     },
+    "Saved": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已攒"
+          }
+        }
+      }
+    },
+    "Saving": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "攒钱"
+          }
+        }
+      }
+    },
     "Savings": {
       "localizations": {
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
             "value": "储蓄"
+          }
+        }
+      }
+    },
+    "Savings Goal": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "攒钱"
+          }
+        }
+      }
+    },
+    "Savings Goals": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "攒钱"
+          }
+        }
+      }
+    },
+    "Savings Wallet": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "攒钱包"
+          }
+        }
+      }
+    },
+    "Search": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "搜索"
           }
         }
       }
@@ -1238,6 +1450,16 @@
         }
       }
     },
+    "Settings": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "设置"
+          }
+        }
+      }
+    },
     "Single Currency": {
       "localizations": {
         "zh-Hans": {
@@ -1248,12 +1470,12 @@
         }
       }
     },
-    "Soda Music": {
+    "Sold": {
       "localizations": {
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "汽水音乐"
+            "value": "已卖出"
           }
         }
       }
@@ -1294,6 +1516,26 @@
           "stringUnit": {
             "state": "translated",
             "value": "统计"
+          }
+        }
+      }
+    },
+    "Status": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "状态"
+          }
+        }
+      }
+    },
+    "Stopped": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "停止使用"
           }
         }
       }
@@ -1428,6 +1670,16 @@
         }
       }
     },
+    "This record is linked to an item and cannot be deleted": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "该账单已绑定物品，无法删除"
+          }
+        }
+      }
+    },
     "This wallet has records and cannot be deleted": {
       "localizations": {
         "zh-Hans": {
@@ -1489,12 +1741,32 @@
         }
       }
     },
+    "Total Assets": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "资产价值"
+          }
+        }
+      }
+    },
     "Transfer": {
       "localizations": {
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
             "value": "转移"
+          }
+        }
+      }
+    },
+    "Transferred": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已转送"
           }
         }
       }
@@ -1519,12 +1791,22 @@
         }
       }
     },
+    "Usage Status": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "使用状态"
+          }
+        }
+      }
+    },
     "Value": {
       "localizations": {
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "值"
+            "value": "价值"
           }
         }
       }
@@ -1555,6 +1837,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "钱包"
+          }
+        }
+      }
+    },
+    "Warranty End": {
+      "localizations": {
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "保修到期"
           }
         }
       }

@@ -12,6 +12,9 @@ import Charts
 struct StatisticsView: View {
     @Query private var records: [BillRecord]
     @Query private var budgets: [Budget]
+    @Query private var savingsGoals: [SavingsGoal]
+    @Query private var wallets: [Wallet]
+    @Query private var items: [Item]
     @AppStorage("defaultCurrency") private var defaultCurrencyRaw = Currency.defaultForLocale().rawValue
     @State private var selectedMonth: Date?
     @State private var showCalendar = false
@@ -90,7 +93,7 @@ struct StatisticsView: View {
 
     /// Income/expense totals grouped by the records' original currencies.
     private var totalsByCurrency: [CurrencyKindTotal] {
-        let filtered = recordsIn(activeMonth).filter { $0.kind != .transfer }
+        let filtered = recordsIn(activeMonth).filter { $0.kind == .expense || $0.kind == .income }
         var totals: [String: Double] = [:]
         for record in filtered {
             totals[record.currencyRaw + record.kindRaw, default: 0] += record.effectiveAmount
@@ -120,6 +123,7 @@ struct StatisticsView: View {
                     ScrollView {
                         VStack(alignment: .leading, spacing: 24) {
                             monthMenu
+                            statCard { assetSummary }
                             statCard {
                                 VStack(spacing: 20) {
                                     summaryRow
@@ -131,6 +135,7 @@ struct StatisticsView: View {
                             }
                             currencyBarChart
                             budgetSection
+                            savingsSection
                         }
                         .padding()
                     }
@@ -138,6 +143,7 @@ struct StatisticsView: View {
                 }
             }
             .navigationTitle("Statistics")
+            .settingsButton()
             .toolbar {
                 if !availableMonths.isEmpty {
                     ToolbarItem(placement: .topBarTrailing) {
@@ -152,6 +158,42 @@ struct StatisticsView: View {
             .sheet(isPresented: $showCalendar) {
                 RecordCalendarView(records: records, month: activeMonth)
                     .presentationDetents([.medium])
+            }
+        }
+    }
+
+    /// Wallet balances plus item values, totaled per currency.
+    private var assetTotals: [(currency: Currency, total: Double)] {
+        var totals: [Currency: Double] = [:]
+        for wallet in wallets {
+            for holding in wallet.holdings {
+                totals[holding.currency, default: 0] += holding.amount
+            }
+        }
+        for item in items {
+            totals[item.displayCurrency, default: 0] += item.displayValue
+        }
+        return totals
+            .filter { abs($0.value) > 0.004 }
+            .map { (currency: $0.key, total: $0.value) }
+            .sorted { $0.currency.rawValue < $1.currency.rawValue }
+    }
+
+    private var assetSummary: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text("Total Assets")
+                .font(.subheadline)
+                .foregroundStyle(.secondary)
+            if assetTotals.isEmpty {
+                Text(moneyText(0, currency: defaultCurrency))
+                    .font(.title2)
+                    .fontWeight(.bold)
+            } else {
+                ForEach(assetTotals, id: \.currency) { entry in
+                    Text(moneyText(entry.total, currency: entry.currency))
+                        .font(.title2)
+                        .fontWeight(.bold)
+                }
             }
         }
     }
@@ -364,6 +406,29 @@ struct StatisticsView: View {
             .reduce(0) { $0 + $1.effectiveAmount }
     }
 
+    /// Total saved into a goal so far (all time, saving records only).
+    private func saved(for goal: SavingsGoal) -> Double {
+        records
+            .filter { $0.savingsGoal === goal && $0.kind == .saving }
+            .reduce(0) { $0 + $1.effectiveAmount }
+    }
+
+    @ViewBuilder
+    private var savingsSection: some View {
+        if !savingsGoals.isEmpty {
+            VStack(alignment: .leading, spacing: 12) {
+                Text("Savings Goals")
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+                LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 12) {
+                    ForEach(savingsGoals) { goal in
+                        SavingsGoalCard(goal: goal, saved: saved(for: goal))
+                    }
+                }
+            }
+        }
+    }
+
     @ViewBuilder
     private var budgetSection: some View {
         if !budgets.isEmpty {
@@ -373,7 +438,12 @@ struct StatisticsView: View {
                     .foregroundStyle(.secondary)
                 LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 12) {
                     ForEach(budgets) { budget in
-                        BudgetCard(budget: budget, used: usage(for: budget))
+                        NavigationLink {
+                            BudgetSavingsView(budget: budget)
+                        } label: {
+                            BudgetCard(budget: budget, used: usage(for: budget))
+                        }
+                        .buttonStyle(.plain)
                     }
                 }
             }
@@ -428,7 +498,45 @@ struct BudgetCard: View {
     }
 }
 
+/// A savings goal card showing progress towards its target.
+struct SavingsGoalCard: View {
+    let goal: SavingsGoal
+    let saved: Double
+
+    private var isComplete: Bool {
+        saved >= goal.amount
+    }
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            HStack(spacing: 6) {
+                GoalIcon(goal: goal, size: 24)
+                Text(goal.name)
+                    .font(.subheadline)
+                    .lineLimit(1)
+                Spacer()
+                Text(goal.currency.symbol)
+                    .font(.caption2)
+                    .foregroundStyle(.secondary)
+            }
+            ProgressView(value: min(saved, goal.amount), total: goal.amount)
+                .tint(isComplete ? .green : Color.accentColor)
+            HStack {
+                Text(moneyText(saved, currency: goal.currency))
+                    .font(.caption)
+                    .foregroundStyle(isComplete ? .green : .secondary)
+                Spacer()
+                Text(moneyText(goal.amount, currency: goal.currency))
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+        }
+        .padding(12)
+        .background(Color(.secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 12, style: .continuous))
+    }
+}
+
 #Preview {
     StatisticsView()
-        .modelContainer(for: [Wallet.self, BillRecord.self, Subcategory.self, Subscription.self, Budget.self], inMemory: true)
+        .modelContainer(for: [Wallet.self, BillRecord.self, Subcategory.self, Subscription.self, Budget.self, SavingsGoal.self, SavingsPlan.self, Item.self], inMemory: true)
 }

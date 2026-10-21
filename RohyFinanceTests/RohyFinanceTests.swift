@@ -15,7 +15,7 @@ struct RohyFinanceTests {
     @MainActor
     private func makeContext() throws -> ModelContext {
         let container = try ModelContainer(
-            for: Wallet.self, BillRecord.self, Subcategory.self, Subscription.self,
+            for: Wallet.self, BillRecord.self, Subcategory.self, Subscription.self, Budget.self, SavingsGoal.self, SavingsPlan.self, Item.self,
             configurations: ModelConfiguration(isStoredInMemoryOnly: true)
         )
         return ModelContext(container)
@@ -100,5 +100,141 @@ struct RohyFinanceTests {
         // The record keeps its own data and balance effect.
         #expect(record.note == "午餐")
         #expect(wallet.holdings.first?.amount == 900)
+    }
+
+    /// When a monthly budget period ends, the leftover is distributed to
+    /// savings plans in order: full amounts while possible, then the remainder
+    /// goes to the first plan that doesn't fit (or has allRemaining on).
+    @MainActor
+    @Test func savingsSettlementDistributesLeftover() throws {
+        let context = try makeContext()
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = TimeZone(identifier: "Asia/Shanghai")!
+
+        let wallet = Wallet(name: "A", source: .alipay, holdings: [Holding(currencyRaw: "cny", amount: 1000)])
+        context.insert(wallet)
+        let budget = Budget(icon: "fork.knife", name: "预算", wallet: wallet, currency: .cny, amount: 500, period: .monthly)
+        budget.createdAt = calendar.date(from: DateComponents(year: 2026, month: 7, day: 1))!
+        context.insert(budget)
+        let goalA = SavingsGoal(name: "旅行", imageData: nil, currency: .cny, amount: 3000)
+        let goalB = SavingsGoal(name: "买电脑", imageData: nil, currency: .cny, amount: 8000)
+        context.insert(goalA)
+        context.insert(goalB)
+        // Plan A needs 100, plan B needs 500.
+        context.insert(SavingsPlan(budget: budget, goal: goalA, amount: 100, allRemaining: false, sortOrder: 0))
+        context.insert(SavingsPlan(budget: budget, goal: goalB, amount: 500, allRemaining: false, sortOrder: 1))
+
+        // 200 spent in the previous month → leftover 300.
+        let now = calendar.date(from: DateComponents(year: 2026, month: 9, day: 10))!
+        let spentDate = calendar.date(from: DateComponents(year: 2026, month: 8, day: 15))!
+        let expense = BillRecord(kind: .expense, amount: 200, currency: .cny, categoryKey: "category.dining", subcategory: nil, note: "吃饭", date: spentDate, wallet: wallet, budget: budget)
+        context.insert(expense)
+        expense.applyBalanceEffect()
+        try context.save()
+
+        SavingsSettlement.processCompletedPeriods(context: context, now: now)
+        try context.save()
+
+        let savings = try context.fetch(FetchDescriptor<BillRecord>())
+            .filter { $0.kind == .saving }
+            .sorted { $0.amount < $1.amount }
+        // A gets 100 (full), B gets the remaining 200 (300 - 100 < 500).
+        #expect(savings.count == 2)
+        #expect(savings[0].amount == 100)
+        #expect(savings[0].savingsGoal === goalA)
+        #expect(savings[1].amount == 200)
+        #expect(savings[1].savingsGoal === goalB)
+        #expect(savings[0].note == "旅行-自动攒钱")
+        // Wallet: 1000 - 200 (expense); savings do not touch wallet balances.
+        #expect(wallet.holdings.first?.amount == 800)
+        // Budget marked as processed; running again creates nothing new.
+        #expect(budget.lastSavingsProcessed != nil)
+        SavingsSettlement.processCompletedPeriods(context: context, now: now)
+        #expect(try context.fetch(FetchDescriptor<BillRecord>()).filter { $0.kind == .saving }.count == 2)
+    }
+
+    /// A plan with allRemaining on receives the entire leftover.
+    @MainActor
+    @Test func savingsSettlementAllRemaining() throws {
+        let context = try makeContext()
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = TimeZone(identifier: "Asia/Shanghai")!
+
+        let wallet = Wallet(name: "A", source: .alipay, holdings: [Holding(currencyRaw: "cny", amount: 1000)])
+        context.insert(wallet)
+        let budget = Budget(icon: "fork.knife", name: "预算", wallet: wallet, currency: .cny, amount: 500, period: .monthly)
+        budget.createdAt = calendar.date(from: DateComponents(year: 2026, month: 7, day: 1))!
+        context.insert(budget)
+        let goal = SavingsGoal(name: "应急", imageData: nil, currency: .cny, amount: 1000)
+        context.insert(goal)
+        context.insert(SavingsPlan(budget: budget, goal: goal, amount: 0, allRemaining: true, sortOrder: 0))
+        try context.save()
+
+        // Nothing spent → full 500 leftover goes to the allRemaining plan.
+        let now = calendar.date(from: DateComponents(year: 2026, month: 9, day: 10))!
+        SavingsSettlement.processCompletedPeriods(context: context, now: now)
+
+        let savings = try context.fetch(FetchDescriptor<BillRecord>()).filter { $0.kind == .saving }
+        #expect(savings.count == 1)
+        #expect(savings[0].amount == 500)
+        #expect(wallet.holdings.first?.amount == 1000)
+    }
+
+    /// A subscription whose lastGeneratedDate is set at creation
+    /// (auto backfill off) produces no records for the elapsed period.
+    @MainActor
+    @Test func subscriptionBackfillSkipped() throws {
+        let context = try makeContext()
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = TimeZone(identifier: "Asia/Shanghai")!
+
+        let wallet = Wallet(name: "A", source: .alipay, holdings: [Holding(currencyRaw: "cny", amount: 1000)])
+        context.insert(wallet)
+
+        let start = calendar.date(byAdding: .month, value: -3, to: .now)!
+        // Backfill on: nil lastGeneratedDate → past renewals are generated.
+        let backfilled = Subscription(name: "A", imageData: nil, presetIcon: nil, amount: 10, currency: .cny, convertedAmount: nil, wallet: wallet, startDate: start, periodDays: 30, advanceDays: 0, isEnabled: true)
+        // Backfill off: lastGeneratedDate = now → nothing for the elapsed period.
+        let skipped = Subscription(name: "B", imageData: nil, presetIcon: nil, amount: 10, currency: .cny, convertedAmount: nil, wallet: wallet, startDate: start, periodDays: 30, advanceDays: 0, isEnabled: true)
+        skipped.lastGeneratedDate = .now
+        context.insert(backfilled)
+        context.insert(skipped)
+        try context.save()
+
+        SubscriptionBilling.generateDueBills(context: context)
+
+        let recordsA = try context.fetch(FetchDescriptor<BillRecord>()).filter { $0.subscription === backfilled }
+        let recordsB = try context.fetch(FetchDescriptor<BillRecord>()).filter { $0.subscription === skipped }
+        #expect(recordsA.count >= 3)
+        #expect(recordsB.isEmpty)
+    }
+
+    /// A budget created mid-period must not settle the previous period;
+    /// saving starts when its first own period ends.
+    @MainActor
+    @Test func newBudgetDoesNotSettlePreviousPeriod() throws {
+        let context = try makeContext()
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = TimeZone(identifier: "Asia/Shanghai")!
+
+        let wallet = Wallet(name: "A", source: .alipay, holdings: [Holding(currencyRaw: "cny", amount: 1000)])
+        context.insert(wallet)
+        let goal = SavingsGoal(name: "旅行", imageData: nil, currency: .cny, amount: 3000)
+        context.insert(goal)
+
+        // Budget created on 2026-09-10; "now" is 2026-09-20 — the August period
+        // completed before the budget existed and must not be settled.
+        let budget = Budget(icon: "fork.knife", name: "预算", wallet: wallet, currency: .cny, amount: 500, period: .monthly)
+        budget.createdAt = calendar.date(from: DateComponents(year: 2026, month: 9, day: 10))!
+        context.insert(budget)
+        context.insert(SavingsPlan(budget: budget, goal: goal, amount: 100, allRemaining: false, sortOrder: 0))
+        try context.save()
+
+        let now = calendar.date(from: DateComponents(year: 2026, month: 9, day: 20))!
+        SavingsSettlement.processCompletedPeriods(context: context, now: now)
+
+        let savings = try context.fetch(FetchDescriptor<BillRecord>()).filter { $0.kind == .saving }
+        #expect(savings.isEmpty)
+        #expect(budget.lastSavingsProcessed == nil)
     }
 }
