@@ -15,7 +15,7 @@ struct RohyFinanceTests {
     @MainActor
     private func makeContext() throws -> ModelContext {
         let container = try ModelContainer(
-            for: Wallet.self, BillRecord.self, Subcategory.self, Subscription.self, Budget.self, SavingsGoal.self, SavingsPlan.self, Item.self, QuickRecord.self,
+            for: Wallet.self, BillRecord.self, Subcategory.self, Subscription.self, Budget.self, SavingsGoal.self, SavingsPlan.self, Item.self, QuickRecord.self, ManagedApp.self,
             configurations: ModelConfiguration(isStoredInMemoryOnly: true)
         )
         return ModelContext(container)

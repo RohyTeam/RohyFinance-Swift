@@ -27,6 +27,8 @@ struct RecordEntryView: View {
     @State private var currency: Currency?
     @State private var budget: Budget?
     @State private var savingsGoal: SavingsGoal?
+    @State private var app: ManagedApp?
+    @State private var showAppPicker = false
     @State private var intPart = ""
     @State private var fracPart = ""
     @State private var wallet: Wallet?
@@ -89,6 +91,8 @@ struct RecordEntryView: View {
         _currency = State(initialValue: record.currency)
         _budget = State(initialValue: record.budget)
         _savingsGoal = State(initialValue: record.savingsGoal)
+        _imageData = State(initialValue: record.imageData)
+        _app = State(initialValue: record.app)
         (_intPart, _fracPart) = Self.amountStates(record.amount)
         _wallet = State(initialValue: record.wallet)
         _targetWallet = State(initialValue: record.targetWallet)
@@ -141,6 +145,7 @@ struct RecordEntryView: View {
         _budget = State(initialValue: draft.budget)
         _savingsGoal = State(initialValue: draft.savingsGoal)
         _imageData = State(initialValue: template.imageData)
+        _app = State(initialValue: template.app)
         (_intPart, _fracPart) = Self.amountStates(draft.amount)
         _wallet = State(initialValue: draft.wallet)
         _targetWallet = State(initialValue: draft.targetWallet)
@@ -236,15 +241,12 @@ struct RecordEntryView: View {
                 if kind == .transfer {
                     Section {
                         HStack {
-                            if templateMode {
-                                imagePickerBox
-                                TextField("Enter bill note", text: $note)
-                                    .multilineTextAlignment(.trailing)
-                            } else {
+                            imagePickerBox
+                            if !templateMode {
                                 Text("Note")
-                                TextField("Enter bill note", text: $note)
-                                    .multilineTextAlignment(.trailing)
                             }
+                            TextField("Enter bill note", text: $note)
+                                .multilineTextAlignment(.trailing)
                         }
                     }
 
@@ -281,22 +283,23 @@ struct RecordEntryView: View {
                 } else if kind == .saving {
                     Section("Info") {
                         HStack {
-                            if templateMode {
-                                imagePickerBox
-                                TextField("Enter bill note", text: $note)
-                                    .multilineTextAlignment(.trailing)
-                            } else {
+                            imagePickerBox
+                            if !templateMode {
                                 Text("Note")
-                                TextField("Enter bill note", text: $note)
-                                    .multilineTextAlignment(.trailing)
                             }
+                            TextField("Enter bill note", text: $note)
+                                .multilineTextAlignment(.trailing)
                         }
 
                         Picker(selection: $savingsGoal) {
                             Text("Select").tag(SavingsGoal?.none)
                             ForEach(savingsGoals) { goal in
-                                Text("\(goal.currency.symbol) \(goal.name)")
-                                    .tag(SavingsGoal?.some(goal))
+                                Label {
+                                    Text("\(goal.currency.symbol) \(goal.name)")
+                                } icon: {
+                                    GoalIcon(goal: goal, size: 20)
+                                }
+                                .tag(SavingsGoal?.some(goal))
                             }
                         } label: {
                             Text("Savings Goal")
@@ -337,15 +340,12 @@ struct RecordEntryView: View {
 
                     Section {
                         HStack {
-                            if templateMode {
-                                imagePickerBox
-                                TextField("Enter bill note", text: $note)
-                                    .multilineTextAlignment(.trailing)
-                            } else {
+                            imagePickerBox
+                            if !templateMode {
                                 Text("Note")
-                                TextField("Enter bill note", text: $note)
-                                    .multilineTextAlignment(.trailing)
                             }
+                            TextField("Enter bill note", text: $note)
+                                .multilineTextAlignment(.trailing)
                         }
                     }
 
@@ -374,6 +374,13 @@ struct RecordEntryView: View {
                             case .value:
                                 amountRow(convertedTitle(defaultCurrency.symbol, String(localized: "Amount")), intPart: $convAmountInt, fracPart: $convAmountFrac)
                             }
+                        }
+
+                    }
+
+                    if kind == .expense {
+                        Section("Software") {
+                            appRow
                         }
                     }
                 }
@@ -454,6 +461,12 @@ struct RecordEntryView: View {
                 ImagePicker(image: $pickedImage)
                     .ignoresSafeArea()
             }
+            .sheet(isPresented: $showAppPicker) {
+                AppPickerView { selected in
+                    app = selected
+                }
+                .presentationDetents([.large])
+            }
             .alert("Notice", isPresented: errorPresented) {
                 Button("OK") {}
             } message: {
@@ -469,6 +482,7 @@ struct RecordEntryView: View {
                 targetCurrency = nil
                 budget = nil
                 savingsGoal = nil
+                app = nil
                 applyDefaultWallet()
             }
             .onChange(of: category) { _, _ in
@@ -774,6 +788,8 @@ struct RecordEntryView: View {
                 date: date,
                 wallet: wallet,
                 budget: budget,
+                imageData: imageData,
+                app: app,
                 taxAmount: tax,
                 discountAmount: discount,
                 consumptionTaxAmount: consumptionTax,
@@ -839,6 +855,7 @@ struct RecordEntryView: View {
                 wallet: wallet,
                 targetWallet: targetWallet,
                 targetCurrencyRaw: targetCurrency.rawValue,
+                imageData: imageData,
                 feeAmount: fee,
                 convertedAmount: convertedAmount
             )
@@ -864,10 +881,35 @@ struct RecordEntryView: View {
                 note: trimmedNote,
                 date: date,
                 wallet: wallet,
-                savingsGoal: savingsGoal
+                savingsGoal: savingsGoal,
+                imageData: imageData
             )
             save(draft)
         }
+    }
+
+    /// Expense only: optional software (app) picker row.
+    private var appRow: some View {
+        Button {
+            showAppPicker = true
+        } label: {
+            HStack {
+                Text("Software")
+                    .foregroundStyle(.primary)
+                Spacer()
+                if let app, let data = app.imageData, let image = UIImage(data: data) {
+                    Image(uiImage: image)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 48, height: 48)
+                        .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+                } else {
+                    Text("Select")
+                        .foregroundStyle(.secondary)
+                }
+            }
+        }
+        .buttonStyle(.plain)
     }
 
     private var imagePickerBox: some View {
@@ -934,5 +976,5 @@ struct RecordEntryView: View {
 
 #Preview {
     RecordEntryView()
-        .modelContainer(for: [Wallet.self, BillRecord.self, Subcategory.self, Subscription.self, Budget.self, SavingsGoal.self, SavingsPlan.self, Item.self, QuickRecord.self], inMemory: true)
+        .modelContainer(for: [Wallet.self, BillRecord.self, Subcategory.self, Subscription.self, Budget.self, SavingsGoal.self, SavingsPlan.self, Item.self, QuickRecord.self, ManagedApp.self], inMemory: true)
 }

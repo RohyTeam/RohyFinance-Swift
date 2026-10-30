@@ -23,6 +23,7 @@ final class QuickRecord {
     var targetCurrencyRaw: String?
     var budget: Budget?
     var savingsGoal: SavingsGoal?
+    var app: ManagedApp?
     var taxAmount: Double?
     var discountAmount: Double?
     var consumptionTaxAmount: Double?
@@ -62,6 +63,8 @@ final class QuickRecord {
             targetCurrencyRaw: targetCurrencyRaw,
             budget: budget,
             savingsGoal: savingsGoal,
+            imageData: imageData,
+            app: app,
             taxAmount: taxAmount,
             discountAmount: discountAmount,
             consumptionTaxAmount: consumptionTaxAmount,
@@ -95,6 +98,7 @@ final class QuickRecord {
         targetCurrencyRaw = draft.targetCurrencyRaw
         budget = draft.budget
         savingsGoal = draft.savingsGoal
+        app = draft.app
         taxAmount = draft.taxAmount
         discountAmount = draft.discountAmount
         consumptionTaxAmount = draft.consumptionTaxAmount

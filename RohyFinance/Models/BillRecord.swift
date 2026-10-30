@@ -45,6 +45,10 @@ final class BillRecord {
     var budget: Budget?
     /// The savings goal this record feeds into (kind == .saving).
     var savingsGoal: SavingsGoal?
+    /// Optional photo attached to the record.
+    var imageData: Data?
+    /// Optional software (from App Management) attached to the record (expense only).
+    var app: ManagedApp?
     /// Income: tax deducted from the pre-tax amount.
     var taxAmount: Double?
     /// Expense: discount deducted from the original price.
@@ -59,7 +63,7 @@ final class BillRecord {
     var convertedDiscountAmount: Double?
     var convertedConsumptionTaxAmount: Double?
 
-    init(kind: RecordKind, amount: Double, currency: Currency, categoryKey: String, subcategory: String?, note: String, date: Date, wallet: Wallet?, targetWallet: Wallet? = nil, targetCurrencyRaw: String? = nil, budget: Budget? = nil, savingsGoal: SavingsGoal? = nil, taxAmount: Double? = nil, discountAmount: Double? = nil, consumptionTaxAmount: Double? = nil, feeAmount: Double? = nil, convertedAmount: Double? = nil, convertedTaxAmount: Double? = nil, convertedDiscountAmount: Double? = nil, convertedConsumptionTaxAmount: Double? = nil) {
+    init(kind: RecordKind, amount: Double, currency: Currency, categoryKey: String, subcategory: String?, note: String, date: Date, wallet: Wallet?, targetWallet: Wallet? = nil, targetCurrencyRaw: String? = nil, budget: Budget? = nil, savingsGoal: SavingsGoal? = nil, imageData: Data? = nil, app: ManagedApp? = nil, taxAmount: Double? = nil, discountAmount: Double? = nil, consumptionTaxAmount: Double? = nil, feeAmount: Double? = nil, convertedAmount: Double? = nil, convertedTaxAmount: Double? = nil, convertedDiscountAmount: Double? = nil, convertedConsumptionTaxAmount: Double? = nil) {
         self.kindRaw = kind.rawValue
         self.amount = amount
         self.currencyRaw = currency.rawValue
@@ -72,6 +76,8 @@ final class BillRecord {
         self.targetCurrencyRaw = targetCurrencyRaw
         self.budget = budget
         self.savingsGoal = savingsGoal
+        self.imageData = imageData
+        self.app = app
         self.taxAmount = taxAmount
         self.discountAmount = discountAmount
         self.consumptionTaxAmount = consumptionTaxAmount
@@ -167,6 +173,8 @@ final class BillRecord {
         targetCurrencyRaw = draft.targetCurrencyRaw
         budget = draft.budget
         savingsGoal = draft.savingsGoal
+        imageData = draft.imageData
+        app = draft.app
         taxAmount = draft.taxAmount
         discountAmount = draft.discountAmount
         consumptionTaxAmount = draft.consumptionTaxAmount
@@ -195,6 +203,8 @@ struct RecordDraft {
     var targetCurrencyRaw: String? = nil
     var budget: Budget? = nil
     var savingsGoal: SavingsGoal? = nil
+    var imageData: Data? = nil
+    var app: ManagedApp? = nil
     var taxAmount: Double? = nil
     var discountAmount: Double? = nil
     var consumptionTaxAmount: Double? = nil
@@ -250,6 +260,8 @@ struct RecordDraft {
             targetCurrencyRaw: targetCurrencyRaw,
             budget: budget,
             savingsGoal: savingsGoal,
+            imageData: imageData,
+            app: app,
             taxAmount: taxAmount,
             discountAmount: discountAmount,
             consumptionTaxAmount: consumptionTaxAmount,

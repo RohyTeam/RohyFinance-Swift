@@ -42,6 +42,10 @@ struct ProfileView: View {
                     NavigationLink("Manage Quick Records") {
                         QuickRecordsView()
                     }
+
+                    NavigationLink("App Management") {
+                        AppManagementView()
+                    }
                 }
             }
             .navigationTitle("Settings")
@@ -120,5 +124,5 @@ struct ProfileView: View {
 
 #Preview {
     ProfileView()
-        .modelContainer(for: [Wallet.self, BillRecord.self, Subcategory.self, Subscription.self, Budget.self, SavingsGoal.self, SavingsPlan.self, Item.self, QuickRecord.self], inMemory: true)
+        .modelContainer(for: [Wallet.self, BillRecord.self, Subcategory.self, Subscription.self, Budget.self, SavingsGoal.self, SavingsPlan.self, Item.self, QuickRecord.self, ManagedApp.self], inMemory: true)
 }

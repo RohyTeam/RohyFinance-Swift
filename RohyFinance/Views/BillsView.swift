@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UIKit
 import SwiftData
 
 struct BillsView: View {
@@ -13,6 +14,7 @@ struct BillsView: View {
     @Query(sort: \BillRecord.date, order: .reverse) private var records: [BillRecord]
     @Query private var items: [Item]
     @State private var editing: BillRecord?
+    @State private var viewing: BillRecord?
     @State private var errorMessage: String?
 
     private var calendar: Calendar { Calendar.current }
@@ -37,6 +39,10 @@ struct BillsView: View {
                     Section {
                         ForEach(group.records) { record in
                             RecordRow(record: record)
+                                .contentShape(Rectangle())
+                                .onTapGesture {
+                                    viewing = record
+                                }
                                 .swipeActions {
                                     Button(role: .destructive) {
                                         delete(record)
@@ -65,6 +71,10 @@ struct BillsView: View {
             }
             .sheet(item: $editing) { record in
                 RecordEntryView(record: record)
+                    .presentationDetents([.large])
+            }
+            .sheet(item: $viewing) { record in
+                BillDetailView(record: record)
                     .presentationDetents([.large])
             }
             .alert("Notice", isPresented: errorPresented) {
@@ -169,9 +179,17 @@ struct RecordRow: View {
     }
 
     var body: some View {
-        HStack(spacing: 12) {
-            if record.kind == .saving, record.savingsGoal?.imageData != nil {
-                GoalIcon(goal: record.savingsGoal, size: 40)
+        HStack(spacing: 8) {
+            if let imageData = record.imageData, let image = UIImage(data: imageData) {
+                Image(uiImage: image)
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 56, height: 56)
+                    .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+            } else if let subscription = record.subscription {
+                SubscriptionIcon(subscription: subscription, size: 56)
+            } else if record.kind == .saving, record.savingsGoal?.imageData != nil {
+                GoalIcon(goal: record.savingsGoal, size: 56)
             } else {
                 Image(systemName: categoryIcon)
                     .font(.title2)
@@ -227,5 +245,5 @@ struct RecordRow: View {
 
 #Preview {
     BillsView()
-        .modelContainer(for: [Wallet.self, BillRecord.self, Subcategory.self, Subscription.self, Budget.self, SavingsGoal.self, SavingsPlan.self, Item.self, QuickRecord.self], inMemory: true)
+        .modelContainer(for: [Wallet.self, BillRecord.self, Subcategory.self, Subscription.self, Budget.self, SavingsGoal.self, SavingsPlan.self, Item.self, QuickRecord.self, ManagedApp.self], inMemory: true)
 }

@@ -1,2354 +1,2463 @@
 {
-  "sourceLanguage": "en",
-  "strings": {
-    "": {},
-    " ": {},
-    "%@ %@": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "new",
-            "value": "%1$@ %2$@"
-          }
-        }
-      }
-    },
-    "%@ · %@": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "new",
-            "value": "%1$@ · %2$@"
-          }
-        }
-      }
-    },
-    "%@（1/3）": {},
-    "%@（2/3）": {},
-    "%@（3/3）": {},
-    "%lld": {},
-    ".": {},
-    "0": {},
-    "0.00": {},
-    "00": {},
-    "1.00": {},
-    ":": {},
-    "Account": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "账户"
-          }
-        }
-      }
-    },
-    "Add": {
-      "extractionState": "stale",
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "添加"
-          }
-        }
-      }
-    },
-    "Add Budget": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "添加预算"
-          }
-        }
-      }
-    },
-    "Add Item": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "添加物品"
-          }
-        }
-      }
-    },
-    "Add Quick Record": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "添加快捷记账"
-          }
-        }
-      }
-    },
-    "Add Savings Goal": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "添加攒钱"
-          }
-        }
-      }
-    },
-    "Add Savings Plan": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "添加攒钱计划"
-          }
-        }
-      }
-    },
-    "Add Sub-item": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "添加子物品"
-          }
-        }
-      }
-    },
-    "Add Subcategory": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "添加子类"
-          }
-        }
-      }
-    },
-    "Add Subscription": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "添加订阅"
-          }
-        }
-      }
-    },
-    "Add Wallet": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "添加钱包"
-          }
-        }
-      }
-    },
-    "Add a record to see statistics": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "记账后即可查看统计"
-          }
-        }
-      }
-    },
-    "Add a wallet to get started": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "点击右上角添加钱包"
-          }
-        }
-      }
-    },
-    "Alipay Wallet": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "支付宝钱包"
-          }
-        }
-      }
-    },
-    "All": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "全部"
-          }
-        }
-      }
-    },
-    "All Remaining": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "剩余全部"
-          }
-        }
-      }
-    },
-    "Amount": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "金额"
-          }
-        }
-      }
-    },
-    "Assets": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "资金"
-          }
-        }
-      }
-    },
-    "At least one currency is required": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "请至少选择一种币种"
-          }
-        }
-      }
-    },
-    "Auto Renewal": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "自动续费"
-          }
-        }
-      }
-    },
-    "Auto Saving": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "自动攒钱"
-          }
-        }
-      }
-    },
-    "Backfill subscription records": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "自动补充订阅记账"
-          }
-        }
-      }
-    },
-    "Bank of China": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "中国银行"
-          }
-        }
-      }
-    },
-    "Bills": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "账单"
-          }
-        }
-      }
-    },
-    "Bind Record": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "绑定账单"
-          }
-        }
-      }
-    },
-    "Bound Record": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "已绑定账单"
-          }
-        }
-      }
-    },
-    "British Pound": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "英镑"
-          }
-        }
-      }
-    },
-    "Budget": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "预算"
-          }
-        }
-      }
-    },
-    "Budgets": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "预算"
-          }
-        }
-      }
-    },
-    "By Currency": {
-      "extractionState": "stale",
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "按币种"
-          }
-        }
-      }
-    },
-    "Calendar": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "日历"
-          }
-        }
-      }
-    },
-    "Cancel": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "取消"
-          }
-        }
-      }
-    },
-    "Cash": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "现金"
-          }
-        }
-      }
-    },
-    "Category": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "分类"
-          }
-        }
-      }
-    },
-    "China Merchants Bank": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "招商银行"
-          }
-        }
-      }
-    },
-    "Coming Soon": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "敬请期待"
-          }
-        }
-      }
-    },
-    "Consumption Tax": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "消费税"
-          }
-        }
-      }
-    },
-    "Continue": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "继续"
-          }
-        }
-      }
-    },
-    "Conversion": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "换算方式"
-          }
-        }
-      }
-    },
-    "Convert to Sub-item": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "转为子物品"
-          }
-        }
-      }
-    },
-    "Currency": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "币种"
-          }
-        }
-      }
-    },
-    "Cycle": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "周期"
-          }
-        }
-      }
-    },
-    "Damaged": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "已损坏"
-          }
-        }
-      }
-    },
-    "Date": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "日期"
-          }
-        }
-      }
-    },
-    "Default Currency": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "默认币种"
-          }
-        }
-      }
-    },
-    "Default Wallet": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "默认钱包"
-          }
-        }
-      }
-    },
-    "Delete": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "删除"
-          }
-        }
-      }
-    },
-    "Discount": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "优惠"
-          }
-        }
-      }
-    },
-    "Discount amount": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "减免金额"
-          }
-        }
-      }
-    },
-    "Discount amount cannot exceed the amount": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "减免金额不能大于金额"
-          }
-        }
-      }
-    },
-    "Done": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "完成"
-          }
-        }
-      }
-    },
-    "Duplicate currencies are not allowed": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "同一个钱包中币种不能重复"
-          }
-        }
-      }
-    },
-    "Edit": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "编辑"
-          }
-        }
-      }
-    },
-    "Edit Budget": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "编辑预算"
-          }
-        }
-      }
-    },
-    "Edit Item": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "编辑物品"
-          }
-        }
-      }
-    },
-    "Edit Quick Record": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "编辑快捷记账"
-          }
-        }
-      }
-    },
-    "Edit Record": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "编辑账单"
-          }
-        }
-      }
-    },
-    "Edit Savings Goal": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "编辑攒钱"
-          }
-        }
-      }
-    },
-    "Edit Subcategory": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "编辑子类"
-          }
-        }
-      }
-    },
-    "Edit Subscription": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "编辑订阅"
-          }
-        }
-      }
-    },
-    "Edit Wallet": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "编辑钱包"
-          }
-        }
-      }
-    },
-    "Enter bill note": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "请输入账单介绍"
-          }
-        }
-      }
-    },
-    "Enter name": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "请输入名称"
-          }
-        }
-      }
-    },
-    "Excludes consumption tax": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "不含消费税"
-          }
-        }
-      }
-    },
-    "Expense": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "支出"
-          }
-        }
-      }
-    },
-    "Expense vs last month": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "较上月支出"
-          }
-        }
-      }
-    },
-    "Fee": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "手续费"
-          }
-        }
-      }
-    },
-    "Fee amount": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "手续费金额"
-          }
-        }
-      }
-    },
-    "Funds": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "资金"
-          }
-        }
-      }
-    },
-    "Goal": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "目标"
-          }
-        }
-      }
-    },
-    "Hong Kong Dollar": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "港币"
-          }
-        }
-      }
-    },
-    "ICBC": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "中国工商银行"
-          }
-        }
-      }
-    },
-    "In Use": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "正在使用"
-          }
-        }
-      }
-    },
-    "Includes discount": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "包含优惠"
-          }
-        }
-      }
-    },
-    "Income": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "收入"
-          }
-        }
-      }
-    },
-    "Income vs last month": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "较上月收入"
-          }
-        }
-      }
-    },
-    "Indian Rupee": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "卢比"
-          }
-        }
-      }
-    },
-    "Info": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "信息"
-          }
-        }
-      }
-    },
-    "Invalid amount": {
-      "extractionState": "stale",
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "金额格式不正确"
-          }
-        }
-      }
-    },
-    "Item Cost": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "物品成本"
-          }
-        }
-      }
-    },
-    "Items": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "物品"
-          }
-        }
-      }
-    },
-    "Japanese Yen": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "日元"
-          }
-        }
-      }
-    },
-    "Kind": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "类型"
-          }
-        }
-      }
-    },
-    "Library": {
-      "extractionState": "stale",
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "图库"
-          }
-        }
-      }
-    },
-    "Manage Quick Records": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "管理快捷记账"
-          }
-        }
-      }
-    },
-    "Month": {},
-    "Monthly": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "月度"
-          }
-        }
-      }
-    },
-    "Monthly Expense": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "本月支出"
-          }
-        }
-      }
-    },
-    "Monthly Income": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "本月收入"
-          }
-        }
-      }
-    },
-    "Multi-Currency": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "多币种"
-          }
-        }
-      }
-    },
-    "Name": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "名称"
-          }
-        }
-      }
-    },
-    "Need an app icon? Tap to get one": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "需要应用图标？点击获取应用图标"
-          }
-        }
-      }
-    },
-    "New Taiwan Dollar": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "新台币"
-          }
-        }
-      }
-    },
-    "No Bills": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "暂无账单"
-          }
-        }
-      }
-    },
-    "No Items": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "暂无物品"
-          }
-        }
-      }
-    },
-    "No Quick Records": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "暂无快捷记账"
-          }
-        }
-      }
-    },
-    "No Records": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "暂无记录"
-          }
-        }
-      }
-    },
-    "No Savings Plans": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "当前暂无攒钱计划"
-          }
-        }
-      }
-    },
-    "No Subcategories": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "暂无子类"
-          }
-        }
-      }
-    },
-    "No Subscriptions": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "暂无订阅"
-          }
-        }
-      }
-    },
-    "No expenses this month": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "本月暂无支出"
-          }
-        }
-      }
-    },
-    "No income this month": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "本月暂无收入"
-          }
-        }
-      }
-    },
-    "No wallets yet": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "当前还没有钱包"
-          }
-        }
-      }
-    },
-    "None": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "无"
-          }
-        }
-      }
-    },
-    "Not selected": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "未选择"
-          }
-        }
-      }
-    },
-    "Note": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "介绍"
-          }
-        }
-      }
-    },
-    "Notice": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "提示"
-          }
-        }
-      }
-    },
-    "OK": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "好"
-          }
-        }
-      }
-    },
-    "Payment": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "扣款项"
-          }
-        }
-      }
-    },
-    "Per Month": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "每月"
-          }
-        }
-      }
-    },
-    "Per Quarter": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "每季"
-          }
-        }
-      }
-    },
-    "Per Week": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "每周"
-          }
-        }
-      }
-    },
-    "Per Year": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "每年"
-          }
-        }
-      }
-    },
-    "Period": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "周期"
-          }
-        }
-      }
-    },
-    "Please enter a name": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "请输入名称"
-          }
-        }
-      }
-    },
-    "Please enter a note": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "请填写介绍"
-          }
-        }
-      }
-    },
-    "Please enter a wallet name": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "请输入钱包名"
-          }
-        }
-      }
-    },
-    "Please enter an amount": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "请输入金额"
-          }
-        }
-      }
-    },
-    "Please enter the converted amount": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "请输入换算金额"
-          }
-        }
-      }
-    },
-    "Please enter the exchange rate": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "请输入汇率"
-          }
-        }
-      }
-    },
-    "Please select a category": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "请选择分类"
-          }
-        }
-      }
-    },
-    "Please select a currency": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "请选择币种"
-          }
-        }
-      }
-    },
-    "Please select a savings goal": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "请选择攒钱"
-          }
-        }
-      }
-    },
-    "Please select a source": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "请选择来源"
-          }
-        }
-      }
-    },
-    "Please select a source wallet": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "请选择来源钱包"
-          }
-        }
-      }
-    },
-    "Please select a target wallet": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "请选择目标钱包"
-          }
-        }
-      }
-    },
-    "Please select a wallet": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "请选择钱包"
-          }
-        }
-      }
-    },
-    "Please select an icon": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "请选择图标"
-          }
-        }
-      }
-    },
-    "Position": {},
-    "Pre-tax": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "非税后"
-          }
-        }
-      }
-    },
-    "Preset": {
-      "extractionState": "stale",
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "预制"
-          }
-        }
-      }
-    },
-    "Purchase Date": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "购买时间"
-          }
-        }
-      }
-    },
-    "Purchased": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "购入"
-          }
-        }
-      }
-    },
-    "Quarterly": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "季度"
-          }
-        }
-      }
-    },
-    "Quick Record": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "快捷记账"
-          }
-        }
-      }
-    },
-    "Rate": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "汇率"
-          }
-        }
-      }
-    },
-    "Record": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "记账"
-          }
-        }
-      }
-    },
-    "Remove from Sub-items": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "移出子物品"
-          }
-        }
-      }
-    },
-    "Renewal Date": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "续费日期"
-          }
-        }
-      }
-    },
-    "Renminbi": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "人民币"
-          }
-        }
-      }
-    },
-    "Requires fee": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "需要手续费"
-          }
-        }
-      }
-    },
-    "Retirement Date": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "预计退役时间"
-          }
-        }
-      }
-    },
-    "Same day": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "当天"
-          }
-        }
-      }
-    },
-    "Same wallet transfer requires different currencies": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "同钱包转移必须选择不同币种"
-          }
-        }
-      }
-    },
-    "Saved": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "已攒"
-          }
-        }
-      }
-    },
-    "Saving": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "攒钱"
-          }
-        }
-      }
-    },
-    "Savings": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "储蓄"
-          }
-        }
-      }
-    },
-    "Savings Goal": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "攒钱"
-          }
-        }
-      }
-    },
-    "Savings Goals": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "攒钱"
-          }
-        }
-      }
-    },
-    "Savings Wallet": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "攒钱包"
-          }
-        }
-      }
-    },
-    "Search": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "搜索"
-          }
-        }
-      }
+  "sourceLanguage" : "en",
+  "strings" : {
+    "" : {
+
     },
-    "Select": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "请选择"
-          }
-        }
-      }
+    " " : {
+
     },
-    "Settings": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "设置"
-          }
-        }
-      }
+    ":" : {
+
     },
-    "Single Currency": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "单币种"
-          }
-        }
-      }
+    "." : {
+
     },
-    "Sold": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "已卖出"
-          }
-        }
-      }
+    "·" : {
+
     },
-    "Source": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "来源"
+    "%@ · %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ · %2$@"
           }
         }
       }
     },
-    "South Korean Won": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "韩元"
+    "%@ %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ %2$@"
           }
         }
       }
     },
-    "Start Date": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "开始日期"
-          }
-        }
-      }
+    "%@（1/3）" : {
+
     },
-    "Statistics": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "统计"
-          }
-        }
-      }
+    "%@（2/3）" : {
+
     },
-    "Status": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "状态"
-          }
-        }
-      }
+    "%@（3/3）" : {
+
     },
-    "Stopped": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "停止使用"
-          }
-        }
-      }
+    "%lld" : {
+
     },
-    "Sub-item Cost": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "子物品成本"
-          }
-        }
-      }
+    "0" : {
+
     },
-    "Sub-items": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "子物品"
-          }
-        }
-      }
+    "00" : {
+
     },
-    "Subcategory": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "子类"
-          }
-        }
-      }
+    "0.00" : {
+
     },
-    "Subcategory Management": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "子类管理"
-          }
-        }
-      }
+    "1.00" : {
+
     },
-    "Subscription Period": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "订阅周期"
+    "Account" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "账户"
           }
         }
       }
     },
-    "Subscriptions": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "订阅"
+    "Add" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "添加"
           }
         }
       }
     },
-    "Swiss Franc": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "法郎"
+    "Add a record to see statistics" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "记账后即可查看统计"
           }
         }
       }
     },
-    "Switching the default currency will erase all records. Continue?": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "切换默认币种将清空所有记录，是否继续？"
+    "Add a wallet to get started" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "点击右上角添加钱包"
           }
         }
       }
     },
-    "Target": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "目标"
+    "Add App" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "添加应用"
           }
         }
       }
     },
-    "Tax": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "缴税"
+    "Add Budget" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "添加预算"
           }
         }
       }
     },
-    "Tax amount": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "税额"
+    "Add Item" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "添加物品"
           }
         }
       }
     },
-    "Tax amount cannot exceed the amount": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "税额不能大于金额"
+    "Add Quick Record" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "添加快捷记账"
           }
         }
       }
     },
-    "The first currency is the wallet's default currency": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "第一位的币种为默认币种"
+    "Add Savings Goal" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "添加攒钱"
           }
         }
       }
     },
-    "This month": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "本月"
+    "Add Savings Plan" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "添加攒钱计划"
           }
         }
       }
     },
-    "This quarter": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "本季"
+    "Add Sub-item" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "添加子物品"
           }
         }
       }
     },
-    "This record is linked to an item and cannot be deleted": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "该账单已绑定物品，无法删除"
+    "Add Subcategory" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "添加子类"
           }
         }
       }
     },
-    "This wallet has records and cannot be deleted": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "该钱包存在账单记录，无法删除"
+    "Add Subscription" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "添加订阅"
           }
         }
       }
     },
-    "This week": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "本周"
+    "Add Wallet" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "添加钱包"
           }
         }
       }
     },
-    "This year": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "本年"
+    "Alipay Wallet" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "支付宝钱包"
           }
         }
       }
     },
-    "Time": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "时间"
+    "All" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "全部"
           }
         }
       }
     },
-    "To": {
-      "extractionState": "stale",
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "目标"
+    "All Remaining" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "剩余全部"
           }
         }
       }
     },
-    "Today": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "今天"
+    "Amount" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "金额"
           }
         }
       }
     },
-    "Total Assets": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "资产价值"
+    "App Management" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "应用管理"
           }
         }
       }
     },
-    "Total Cost": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "总成本"
+    "Assets" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "资金"
           }
         }
       }
     },
-    "Transfer": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "转移"
+    "At least one currency is required" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "请至少选择一种币种"
           }
         }
       }
     },
-    "Transferred": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "已转送"
+    "Auto Renewal" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "自动续费"
           }
         }
       }
     },
-    "Type": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "类型"
+    "Auto Saving" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "自动攒钱"
           }
         }
       }
     },
-    "US Dollar": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "美元"
+    "Backfill subscription records" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "自动补充订阅记账"
           }
         }
       }
     },
-    "Usage Status": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "使用状态"
+    "Bank of China" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "中国银行"
           }
         }
       }
     },
-    "Used for %lld days": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "已使用 %lld 天"
+    "Bills" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "账单"
           }
         }
       }
     },
-    "Value": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "价值"
+    "Bind Record" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "绑定账单"
           }
         }
       }
     },
-    "Wallet": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "钱包"
+    "Bound Record" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "已绑定账单"
           }
         }
       }
     },
-    "Wallet name already exists": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "钱包名已存在"
+    "British Pound" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "英镑"
           }
         }
       }
     },
-    "Wallets": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "钱包"
+    "Budget" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "预算"
           }
         }
       }
     },
-    "Warranty End": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "保修到期"
+    "Budgets" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "预算"
           }
         }
       }
     },
-    "WeChat Wallet": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "微信钱包"
+    "By Currency" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "按币种"
           }
         }
       }
     },
-    "Year": {},
-    "Yearly": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "年度"
+    "Calendar" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "日历"
           }
         }
       }
     },
-    "Your records will appear here": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "记账后将显示在这里"
+    "Cancel" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "取消"
           }
         }
       }
     },
-    "Your subcategories will appear here": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "创建的子类将显示在这里"
+    "Cash" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "现金"
           }
         }
       }
     },
-    "Your subscriptions will appear here": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "添加订阅后将显示在这里"
+    "Category" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "分类"
           }
         }
       }
     },
-    "category.beauty": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Beauty"
+    "category.beauty" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Beauty"
           }
         },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "美容"
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "美容"
           }
         }
       }
     },
-    "category.books": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Books"
+    "category.books" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Books"
           }
         },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "书籍"
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "书籍"
           }
         }
       }
     },
-    "category.clothing": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Clothing"
+    "category.clothing" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clothing"
           }
         },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "衣物"
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "衣物"
           }
         }
       }
     },
-    "category.communication": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Communication"
+    "category.communication" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Communication"
           }
         },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "通讯"
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "通讯"
           }
         }
       }
     },
-    "category.daily": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Daily Necessities"
+    "category.daily" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Daily Necessities"
           }
         },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "日用"
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "日用"
           }
         }
       }
     },
-    "category.dining": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Dining"
+    "category.dining" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dining"
           }
         },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "餐饮"
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "餐饮"
           }
         }
       }
     },
-    "category.fruits": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Fruits"
+    "category.fruits" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fruits"
           }
         },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "水果"
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "水果"
           }
         }
       }
     },
-    "category.games": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Games"
+    "category.games" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Games"
           }
         },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "游戏"
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "游戏"
           }
         }
       }
     },
-    "category.lottery": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Lottery"
+    "category.lottery" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lottery"
           }
         },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "彩票"
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "彩票"
           }
         }
       }
     },
-    "category.luckyMoney": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Lucky Money"
+    "category.luckyMoney" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lucky Money"
           }
         },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "压岁钱"
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "压岁钱"
           }
         }
       }
     },
-    "category.salary": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Salary"
+    "category.other" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Other"
           }
         },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "工资"
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "其他"
           }
         }
       }
     },
-    "category.scholarship": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Scholarship"
+    "category.salary" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Salary"
           }
         },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "奖学金"
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "工资"
           }
         }
       }
     },
-    "category.snacks": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Snacks"
+    "category.scholarship" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Scholarship"
           }
         },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "零食"
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "奖学金"
           }
         }
       }
     },
-    "category.sports": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sports"
+    "category.snacks" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Snacks"
           }
         },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "运动"
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "零食"
           }
         }
       }
     },
-    "category.study": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Study"
+    "category.sports" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sports"
           }
         },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "学习"
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "运动"
           }
         }
       }
     },
-    "category.subscription": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Subscription"
+    "category.study" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Study"
           }
         },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "订阅"
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "学习"
           }
         }
       }
     },
-    "category.transport": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Transport"
+    "category.subscription" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Subscription"
           }
         },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "交通"
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "订阅"
           }
         }
       }
     },
-    "category.vegetables": {
-      "extractionState": "stale",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Vegetables"
+    "category.transport" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Transport"
           }
         },
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "蔬菜"
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "交通"
           }
         }
       }
     },
-    "days": {
-      "localizations": {
-        "zh-Hans": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "天"
+    "category.vegetables" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vegetables"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "蔬菜"
           }
         }
       }
     },
-    "·": {}
+    "China Merchants Bank" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "招商银行"
+          }
+        }
+      }
+    },
+    "Coming Soon" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "敬请期待"
+          }
+        }
+      }
+    },
+    "Consumption Tax" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "消费税"
+          }
+        }
+      }
+    },
+    "Continue" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "继续"
+          }
+        }
+      }
+    },
+    "Conversion" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "换算方式"
+          }
+        }
+      }
+    },
+    "Convert to Sub-item" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "转为子物品"
+          }
+        }
+      }
+    },
+    "Currency" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "币种"
+          }
+        }
+      }
+    },
+    "Cycle" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "周期"
+          }
+        }
+      }
+    },
+    "Damaged" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "已损坏"
+          }
+        }
+      }
+    },
+    "Date" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "日期"
+          }
+        }
+      }
+    },
+    "days" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "天"
+          }
+        }
+      }
+    },
+    "Default Currency" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "默认币种"
+          }
+        }
+      }
+    },
+    "Default Wallet" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "默认钱包"
+          }
+        }
+      }
+    },
+    "Delete" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "删除"
+          }
+        }
+      }
+    },
+    "Discount" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "优惠"
+          }
+        }
+      }
+    },
+    "Discount amount" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "减免金额"
+          }
+        }
+      }
+    },
+    "Discount amount cannot exceed the amount" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "减免金额不能大于金额"
+          }
+        }
+      }
+    },
+    "Done" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "完成"
+          }
+        }
+      }
+    },
+    "Duplicate currencies are not allowed" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "同一个钱包中币种不能重复"
+          }
+        }
+      }
+    },
+    "Edit" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "编辑"
+          }
+        }
+      }
+    },
+    "Edit App" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "编辑应用"
+          }
+        }
+      }
+    },
+    "Edit Budget" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "编辑预算"
+          }
+        }
+      }
+    },
+    "Edit Item" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "编辑物品"
+          }
+        }
+      }
+    },
+    "Edit Quick Record" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "编辑快捷记账"
+          }
+        }
+      }
+    },
+    "Edit Record" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "编辑账单"
+          }
+        }
+      }
+    },
+    "Edit Savings Goal" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "编辑攒钱"
+          }
+        }
+      }
+    },
+    "Edit Subcategory" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "编辑子类"
+          }
+        }
+      }
+    },
+    "Edit Subscription" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "编辑订阅"
+          }
+        }
+      }
+    },
+    "Edit Wallet" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "编辑钱包"
+          }
+        }
+      }
+    },
+    "Enter bill note" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "请输入账单介绍"
+          }
+        }
+      }
+    },
+    "Enter name" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "请输入名称"
+          }
+        }
+      }
+    },
+    "Excludes consumption tax" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "不含消费税"
+          }
+        }
+      }
+    },
+    "Expense" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "支出"
+          }
+        }
+      }
+    },
+    "Expense vs last month" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "较上月支出"
+          }
+        }
+      }
+    },
+    "Fee" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "手续费"
+          }
+        }
+      }
+    },
+    "Fee amount" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "手续费金额"
+          }
+        }
+      }
+    },
+    "Funds" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "资金"
+          }
+        }
+      }
+    },
+    "Goal" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "目标"
+          }
+        }
+      }
+    },
+    "Hong Kong Dollar" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "港币"
+          }
+        }
+      }
+    },
+    "ICBC" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "中国工商银行"
+          }
+        }
+      }
+    },
+    "In Use" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "正在使用"
+          }
+        }
+      }
+    },
+    "Includes discount" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "包含优惠"
+          }
+        }
+      }
+    },
+    "Income" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "收入"
+          }
+        }
+      }
+    },
+    "Income vs last month" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "较上月收入"
+          }
+        }
+      }
+    },
+    "Indian Rupee" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "卢比"
+          }
+        }
+      }
+    },
+    "Info" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "信息"
+          }
+        }
+      }
+    },
+    "Invalid amount" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "金额格式不正确"
+          }
+        }
+      }
+    },
+    "Item Cost" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "物品成本"
+          }
+        }
+      }
+    },
+    "Items" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "物品"
+          }
+        }
+      }
+    },
+    "Japanese Yen" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "日元"
+          }
+        }
+      }
+    },
+    "Kind" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "类型"
+          }
+        }
+      }
+    },
+    "Library" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "图库"
+          }
+        }
+      }
+    },
+    "Manage Quick Records" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "管理快捷记账"
+          }
+        }
+      }
+    },
+    "Month" : {
+
+    },
+    "Monthly" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "月度"
+          }
+        }
+      }
+    },
+    "Monthly Expense" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "本月支出"
+          }
+        }
+      }
+    },
+    "Monthly Income" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "本月收入"
+          }
+        }
+      }
+    },
+    "Multi-Currency" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "多币种"
+          }
+        }
+      }
+    },
+    "Name" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "名称"
+          }
+        }
+      }
+    },
+    "Need an app icon? Tap to get one" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "需要应用图标？点击获取应用图标"
+          }
+        }
+      }
+    },
+    "New Taiwan Dollar" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "新台币"
+          }
+        }
+      }
+    },
+    "No Apps" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "暂无应用"
+          }
+        }
+      }
+    },
+    "No Bills" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "暂无账单"
+          }
+        }
+      }
+    },
+    "No expenses this month" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "本月暂无支出"
+          }
+        }
+      }
+    },
+    "No income this month" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "本月暂无收入"
+          }
+        }
+      }
+    },
+    "No Items" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "暂无物品"
+          }
+        }
+      }
+    },
+    "No Quick Records" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "暂无快捷记账"
+          }
+        }
+      }
+    },
+    "No Records" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "暂无记录"
+          }
+        }
+      }
+    },
+    "No Savings Plans" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "当前暂无攒钱计划"
+          }
+        }
+      }
+    },
+    "No Subcategories" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "暂无子类"
+          }
+        }
+      }
+    },
+    "No Subscriptions" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "暂无订阅"
+          }
+        }
+      }
+    },
+    "No wallets yet" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "当前还没有钱包"
+          }
+        }
+      }
+    },
+    "None" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "无"
+          }
+        }
+      }
+    },
+    "Not selected" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "未选择"
+          }
+        }
+      }
+    },
+    "Note" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "介绍"
+          }
+        }
+      }
+    },
+    "Notice" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "提示"
+          }
+        }
+      }
+    },
+    "OK" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "好"
+          }
+        }
+      }
+    },
+    "Payment" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "扣款项"
+          }
+        }
+      }
+    },
+    "Per Month" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "每月"
+          }
+        }
+      }
+    },
+    "Per Quarter" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "每季"
+          }
+        }
+      }
+    },
+    "Per Week" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "每周"
+          }
+        }
+      }
+    },
+    "Per Year" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "每年"
+          }
+        }
+      }
+    },
+    "Period" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "周期"
+          }
+        }
+      }
+    },
+    "Please enter a name" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "请输入名称"
+          }
+        }
+      }
+    },
+    "Please enter a note" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "请填写介绍"
+          }
+        }
+      }
+    },
+    "Please enter a wallet name" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "请输入钱包名"
+          }
+        }
+      }
+    },
+    "Please enter an amount" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "请输入金额"
+          }
+        }
+      }
+    },
+    "Please enter the converted amount" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "请输入换算金额"
+          }
+        }
+      }
+    },
+    "Please enter the exchange rate" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "请输入汇率"
+          }
+        }
+      }
+    },
+    "Please select a category" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "请选择分类"
+          }
+        }
+      }
+    },
+    "Please select a currency" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "请选择币种"
+          }
+        }
+      }
+    },
+    "Please select a savings goal" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "请选择攒钱"
+          }
+        }
+      }
+    },
+    "Please select a source" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "请选择来源"
+          }
+        }
+      }
+    },
+    "Please select a source wallet" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "请选择来源钱包"
+          }
+        }
+      }
+    },
+    "Please select a target wallet" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "请选择目标钱包"
+          }
+        }
+      }
+    },
+    "Please select a wallet" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "请选择钱包"
+          }
+        }
+      }
+    },
+    "Please select an icon" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "请选择图标"
+          }
+        }
+      }
+    },
+    "Position" : {
+
+    },
+    "Pre-tax" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "非税后"
+          }
+        }
+      }
+    },
+    "Preset" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "预制"
+          }
+        }
+      }
+    },
+    "Purchase Date" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "购买时间"
+          }
+        }
+      }
+    },
+    "Purchased" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "购入"
+          }
+        }
+      }
+    },
+    "Quarterly" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "季度"
+          }
+        }
+      }
+    },
+    "Quick Record" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "快捷记账"
+          }
+        }
+      }
+    },
+    "Rate" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "汇率"
+          }
+        }
+      }
+    },
+    "Record" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "记账"
+          }
+        }
+      }
+    },
+    "Record Detail" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "账单详情"
+          }
+        }
+      }
+    },
+    "Remove from Sub-items" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "移出子物品"
+          }
+        }
+      }
+    },
+    "Renewal Date" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "续费日期"
+          }
+        }
+      }
+    },
+    "Renminbi" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "人民币"
+          }
+        }
+      }
+    },
+    "Requires fee" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "需要手续费"
+          }
+        }
+      }
+    },
+    "Retirement Date" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "预计退役时间"
+          }
+        }
+      }
+    },
+    "Same day" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "当天"
+          }
+        }
+      }
+    },
+    "Same wallet transfer requires different currencies" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "同钱包转移必须选择不同币种"
+          }
+        }
+      }
+    },
+    "Saved" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "已攒"
+          }
+        }
+      }
+    },
+    "Saving" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "攒钱"
+          }
+        }
+      }
+    },
+    "Savings" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "储蓄"
+          }
+        }
+      }
+    },
+    "Savings Goal" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "攒钱"
+          }
+        }
+      }
+    },
+    "Savings Goals" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "攒钱"
+          }
+        }
+      }
+    },
+    "Savings Wallet" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "攒钱包"
+          }
+        }
+      }
+    },
+    "Search" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "搜索"
+          }
+        }
+      }
+    },
+    "Select" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "请选择"
+          }
+        }
+      }
+    },
+    "Settings" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "设置"
+          }
+        }
+      }
+    },
+    "Single Currency" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "单币种"
+          }
+        }
+      }
+    },
+    "Software" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "软件"
+          }
+        }
+      }
+    },
+    "Sold" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "已卖出"
+          }
+        }
+      }
+    },
+    "Source" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "来源"
+          }
+        }
+      }
+    },
+    "South Korean Won" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "韩元"
+          }
+        }
+      }
+    },
+    "Start Date" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "开始日期"
+          }
+        }
+      }
+    },
+    "Statistics" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "统计"
+          }
+        }
+      }
+    },
+    "Status" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "状态"
+          }
+        }
+      }
+    },
+    "Stopped" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "停止使用"
+          }
+        }
+      }
+    },
+    "Sub-item Cost" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "子物品成本"
+          }
+        }
+      }
+    },
+    "Sub-items" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "子物品"
+          }
+        }
+      }
+    },
+    "Subcategory" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "子类"
+          }
+        }
+      }
+    },
+    "Subcategory Management" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "子类管理"
+          }
+        }
+      }
+    },
+    "Subscription Period" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "订阅周期"
+          }
+        }
+      }
+    },
+    "Subscriptions" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "订阅"
+          }
+        }
+      }
+    },
+    "Swiss Franc" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "法郎"
+          }
+        }
+      }
+    },
+    "Switching the default currency will erase all records. Continue?" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "切换默认币种将清空所有记录，是否继续？"
+          }
+        }
+      }
+    },
+    "Target" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "目标"
+          }
+        }
+      }
+    },
+    "Tax" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "缴税"
+          }
+        }
+      }
+    },
+    "Tax amount" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "税额"
+          }
+        }
+      }
+    },
+    "Tax amount cannot exceed the amount" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "税额不能大于金额"
+          }
+        }
+      }
+    },
+    "The first currency is the wallet's default currency" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "第一位的币种为默认币种"
+          }
+        }
+      }
+    },
+    "This month" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "本月"
+          }
+        }
+      }
+    },
+    "This quarter" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "本季"
+          }
+        }
+      }
+    },
+    "This record is linked to an item and cannot be deleted" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "该账单已绑定物品，无法删除"
+          }
+        }
+      }
+    },
+    "This wallet has records and cannot be deleted" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "该钱包存在账单记录，无法删除"
+          }
+        }
+      }
+    },
+    "This week" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "本周"
+          }
+        }
+      }
+    },
+    "This year" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "本年"
+          }
+        }
+      }
+    },
+    "Time" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "时间"
+          }
+        }
+      }
+    },
+    "To" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "目标"
+          }
+        }
+      }
+    },
+    "Today" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "今天"
+          }
+        }
+      }
+    },
+    "Total Assets" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "资产价值"
+          }
+        }
+      }
+    },
+    "Total Cost" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "总成本"
+          }
+        }
+      }
+    },
+    "Transfer" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "转移"
+          }
+        }
+      }
+    },
+    "Transferred" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "已转送"
+          }
+        }
+      }
+    },
+    "Type" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "类型"
+          }
+        }
+      }
+    },
+    "US Dollar" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "美元"
+          }
+        }
+      }
+    },
+    "Usage Status" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "使用状态"
+          }
+        }
+      }
+    },
+    "Used for %lld days" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "已使用 %lld 天"
+          }
+        }
+      }
+    },
+    "Value" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "价值"
+          }
+        }
+      }
+    },
+    "Wallet" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "钱包"
+          }
+        }
+      }
+    },
+    "Wallet name already exists" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "钱包名已存在"
+          }
+        }
+      }
+    },
+    "Wallets" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "钱包"
+          }
+        }
+      }
+    },
+    "Warranty End" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "保修到期"
+          }
+        }
+      }
+    },
+    "WeChat Wallet" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "微信钱包"
+          }
+        }
+      }
+    },
+    "Year" : {
+
+    },
+    "Yearly" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "年度"
+          }
+        }
+      }
+    },
+    "Your records will appear here" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "记账后将显示在这里"
+          }
+        }
+      }
+    },
+    "Your subcategories will appear here" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "创建的子类将显示在这里"
+          }
+        }
+      }
+    },
+    "Your subscriptions will appear here" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "添加订阅后将显示在这里"
+          }
+        }
+      }
+    }
   },
-  "version": "1.0"
+  "version" : "1.0"
 }

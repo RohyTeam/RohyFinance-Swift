@@ -36,6 +36,7 @@ enum CategoryStore {
         CategoryDef(key: "category.communication", icon: "phone"),
         CategoryDef(key: "category.beauty", icon: "sparkles"),
         CategoryDef(key: "category.subscription", icon: "calendar"),
+        CategoryDef(key: "category.other", icon: "ellipsis"),
     ]
 
     static let incomes: [CategoryDef] = [
@@ -43,6 +44,7 @@ enum CategoryStore {
         CategoryDef(key: "category.lottery", icon: "ticket"),
         CategoryDef(key: "category.luckyMoney", icon: "envelope"),
         CategoryDef(key: "category.scholarship", icon: "medal"),
+        CategoryDef(key: "category.other", icon: "ellipsis"),
     ]
 
     static let all: [CategoryDef] = expenses + incomes

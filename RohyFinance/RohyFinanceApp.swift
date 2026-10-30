@@ -21,6 +21,7 @@ struct RohyFinanceApp: App {
             SavingsPlan.self,
             Item.self,
             QuickRecord.self,
+            ManagedApp.self,
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 
